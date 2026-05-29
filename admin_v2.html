@@ -114,8 +114,22 @@ style="display:none">
 <h1>
 Shadab Flour Mill Orders
 </h1>
+<button
+onclick="
+document.getElementById('alarm').pause();
+document.getElementById('alarm').currentTime=0;
+">
 
+Stop Alarm
+
+</button>
 <div id="orders"></div>
+
+<audio
+id="alarm"
+src="alarm.mp3"
+loop>
+</audio>
 
 </div>
 
@@ -143,6 +157,8 @@ appId: "1:835817978059:web:441596d86a28628c3fc34e"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+let lastOrderCount = 0;
+
 if(
 localStorage.getItem("adminLoggedIn")
 ==
@@ -158,6 +174,32 @@ document.getElementById(
 ).style.display="block";
 
 loadOrders();
+
+}
+async function checkNewOrders(){
+
+const snap =
+await getDocs(
+collection(db,"orders")
+);
+
+if(
+lastOrderCount != 0 &&
+snap.size > lastOrderCount
+){
+
+document
+.getElementById("alarm")
+.play();
+
+alert(
+"🔔 New Order Received!"
+);
+
+}
+
+lastOrderCount =
+snap.size;
 
 }
 
@@ -192,7 +234,12 @@ document.getElementById(
 ).style.display="block";
 
 loadOrders();
+checkNewOrders();
 
+setInterval(
+checkNewOrders,
+5000
+);
 }else{
 
 alert(
