@@ -218,6 +218,16 @@ No Order Checked Yet
 
 </div>
 
+<h3 style="margin-top:20px">
+📦 My Orders Dashboard
+</h3>
+
+<div id="orderStats" class="status-box">
+No Orders
+</div>
+
+<div id="allOrders"></div>
+
 </div>
 
 <div class="card">
@@ -486,8 +496,133 @@ ${emoji}
 ${latestOrder.status}
 </h2>
 `;
-
+loadCustomerOrders(phone);
 };
+async function loadCustomerOrders(phone){
+
+const snap =
+await getDocs(
+collection(db,"orders")
+);
+
+let total=0;
+let pending=0;
+let confirmed=0;
+let delivery=0;
+let delivered=0;
+
+let html="";
+
+snap.forEach((d)=>{
+
+const order=d.data();
+
+if(order.phone!=phone)
+return;
+
+if(
+order.status=="Delivered" &&
+order.deliveredAt
+){
+
+const mins=
+(
+new Date() -
+new Date(order.deliveredAt)
+)
+/
+1000
+/
+60;
+
+if(mins>30)
+return;
+
+}
+
+total++;
+
+if(order.status=="Pending")
+pending++;
+
+if(order.status=="Confirmed")
+confirmed++;
+
+if(order.status=="Out For Delivery")
+delivery++;
+
+if(order.status=="Delivered")
+delivered++;
+
+let emoji="🟡";
+
+if(order.status=="Confirmed")
+emoji="🟢";
+
+if(order.status=="Out For Delivery")
+emoji="🔵";
+
+if(order.status=="Delivered")
+emoji="✅";
+
+html += `
+<div class="card">
+
+<h3>
+${emoji}
+${order.product}
+</h3>
+
+<p>
+Quantity:
+${order.quantityKg} KG
+</p>
+
+<p>
+Total:
+₹${order.totalAmount}
+</p>
+
+<p>
+Status:
+${order.status}
+</p>
+
+</div>
+`;
+
+});
+
+document.getElementById(
+"orderStats"
+).innerHTML=
+
+`
+📦 Total Orders:
+${total}
+<br><br>
+
+🟡 Pending:
+${pending}
+<br>
+
+🟢 Confirmed:
+${confirmed}
+<br>
+
+🔵 Out For Delivery:
+${delivery}
+<br>
+
+✅ Delivered:
+${delivered}
+`;
+
+document.getElementById(
+"allOrders"
+).innerHTML=html;
+
+}
 
 window.onload = function(){
 
@@ -504,7 +639,12 @@ document.getElementById(
 savedPhone;
 
 checkStatus();
-
+setInterval(
+()=>{
+checkStatus();
+},
+30000
+);
 }
 
 };
