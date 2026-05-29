@@ -196,6 +196,17 @@ if(!data.customerName) return;
 const status =
 data.status || "Pending";
 
+let statusColor = "#ff9800";
+
+if(status=="Confirmed")
+statusColor="#4CAF50";
+
+if(status=="Out For Delivery")
+statusColor="#2196F3";
+
+if(status=="Delivered")
+statusColor="#009688";
+
 ordersDiv.innerHTML += `
 
 <div class="order">
@@ -229,7 +240,8 @@ ${data.quantityKg} KG
 ₹${data.totalAmount}
 </p>
 
-<p class="status">
+<p class="status"
+style="color:${statusColor}">
 Status:
 ${status}
 </p>
@@ -238,6 +250,12 @@ ${status}
 class="pending"
 onclick="updateStatus('${d.id}','Pending')">
 Pending
+</button>
+
+<button
+style="background:#4CAF50;color:white;"
+onclick="updateStatus('${d.id}','Confirmed')">
+Confirmed
 </button>
 
 <button
