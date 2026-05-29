@@ -1,51 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shadab Flour Mill</title>
+
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#f5f5f5;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
+
+body{
+background:#f4f4f4;
+}
+
 header{
 background:#8B4513;
-color:#fff;
-padding:20px;
+color:white;
 text-align:center;
+padding:20px;
 }
-.card{
-background:#fff;
-margin:15px;
+
+header h1{
+font-size:32px;
+}
+
+header p{
+margin-top:5px;
+}
+
+.container{
+max-width:800px;
+margin:20px auto;
 padding:15px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,.15);
 }
-input,select,button{
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.card h2{
+margin-bottom:15px;
+color:#8B4513;
+}
+
+.product{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.product:last-child{
+border:none;
+}
+
+input,select{
 width:100%;
 padding:12px;
 margin-top:10px;
-box-sizing:border-box;
+border:1px solid #ccc;
+border-radius:8px;
 }
+
 button{
+width:100%;
+padding:14px;
+margin-top:15px;
 background:#8B4513;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.total{
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
+color:green;
+text-align:center;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+color:#666;
 }
 </style>
 </head>
+
 <body>
 
 <header>
 <h1>🌾 Shadab Flour Mill</h1>
 <p>Kondhwa, Pune</p>
+<p>Cash On Delivery Available</p>
 </header>
 
+<div class="container">
+
 <div class="card">
-<h2>Products</h2>
+<h2>Available Products</h2>
+
+<div class="product">🌾 Wheat Flour - ₹50/KG</div>
+<div class="product">🌽 Jowar Flour - ₹50/KG</div>
+<div class="product">🌾 Bajra Flour - ₹50/KG</div>
+<div class="product">🟡 Besan (Chana Dal Flour) - ₹50/KG</div>
+
+</div>
+
+<div class="card">
+
+<h2>Place Order</h2>
 
 <select id="product">
 <option>Wheat Flour</option>
@@ -54,7 +131,7 @@ border-radius:5px;
 <option>Besan</option>
 </select>
 
-<input type="number" id="kg" placeholder="Quantity (KG)">
+<input type="number" id="kg" placeholder="Quantity in KG">
 
 <input type="text" id="name" placeholder="Customer Name">
 
@@ -62,22 +139,100 @@ border-radius:5px;
 
 <input type="text" id="address" placeholder="Delivery Address">
 
-<button onclick="calc()">Calculate Amount</button>
+<button onclick="calculateTotal()">
+Calculate Amount
+</button>
 
-<h3 id="total"></h3>
+<div class="total" id="total">
+Total Amount: ₹0
+</div>
 
-<button onclick="alert('Order feature next step me add karenge')">
+<button onclick="placeOrder()">
 Place COD Order
 </button>
+
+</div>
+
+<div class="card">
+<h2>Contact Us</h2>
+
+<p>📍 Kondhwa, Pune</p>
+<p>📞 8459925150</p>
+
+<a href="https://wa.me/918459925150">
+<button>
+Order on WhatsApp
+</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Shadab Flour Mill
 </div>
 
 <script>
-function calc(){
-let kg=parseFloat(document.getElementById("kg").value)||0;
-let total=kg*50;
-document.getElementById("total").innerHTML=
-"Total Amount: ₹"+total;
+
+function calculateTotal(){
+
+let kg =
+parseFloat(document.getElementById("kg").value) || 0;
+
+let total = kg * 50;
+
+document.getElementById("total").innerHTML =
+"Total Amount: ₹" + total;
+
 }
+
+function placeOrder(){
+
+let product =
+document.getElementById("product").value;
+
+let kg =
+document.getElementById("kg").value;
+
+let name =
+document.getElementById("name").value;
+
+let phone =
+document.getElementById("phone").value;
+
+let address =
+document.getElementById("address").value;
+
+if(
+!name ||
+!phone ||
+!address ||
+!kg
+){
+alert("Please fill all details");
+return;
+}
+
+let total = kg * 50;
+
+let message =
+"🌾 Shadab Flour Mill Order%0A%0A" +
+"Name: " + name + "%0A" +
+"Phone: " + phone + "%0A" +
+"Product: " + product + "%0A" +
+"Quantity: " + kg + " KG%0A" +
+"Address: " + address + "%0A" +
+"Total: ₹" + total + "%0A" +
+"Payment: Cash On Delivery";
+
+window.open(
+"https://wa.me/918459925150?text=" + message,
+"_blank"
+);
+
+}
+
 </script>
 
 </body>
