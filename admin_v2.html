@@ -42,6 +42,7 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 margin-top:10px;
+margin-right:5px;
 }
 
 .loginBtn{
@@ -67,6 +68,11 @@ color:white;
 
 .delivered{
 background:#009688;
+color:white;
+}
+
+.stopBtn{
+background:#f44336;
 color:white;
 }
 
@@ -112,9 +118,11 @@ id="adminPanel"
 style="display:none">
 
 <h1>
-Shadab Flour Mill Orders
+🌾 Shadab Flour Mill Orders
 </h1>
+
 <button
+class="stopBtn"
 onclick="
 document.getElementById('alarm').pause();
 document.getElementById('alarm').currentTime=0;
@@ -123,17 +131,15 @@ document.getElementById('alarm').currentTime=0;
 Stop Alarm
 
 </button>
-<div id="orders"></div>
 
 <audio
 id="alarm"
-controls
 src="alarm.mp3"
 loop>
 </audio>
-<button onclick="document.getElementById('alarm').play()">
-TEST ALARM
-</button>
+
+<div id="orders"></div>
+
 </div>
 
 <script type="module">
@@ -180,14 +186,13 @@ loadOrders();
 
 checkNewOrders();
 
-setInterval(async ()=>{
-
-await checkNewOrders();
-await loadOrders();
-
-},5000);
+setInterval(
+checkNewOrders,
+5000
+);
 
 }
+
 async function checkNewOrders(){
 
 const snap =
@@ -201,15 +206,12 @@ snap.forEach((d)=>{
 
 const data = d.data();
 
-if(data.createdAt){
-
 if(
+data.createdAt &&
 data.createdAt > newestTime
 ){
 newestTime =
 data.createdAt;
-}
-
 }
 
 });
@@ -217,35 +219,35 @@ data.createdAt;
 if(
 lastOrderTime &&
 newestTime &&
-new Date(newestTime) > new Date(lastOrderTime)
+new Date(newestTime) >
+new Date(lastOrderTime)
 ){
 
-console.log("NEW ORDER DETECTED");
+document
+.getElementById("alarm")
+.play();
 
-if(
-document.getElementById("alarm").paused
-){
+setTimeout(()=>{
 
-document.getElementById("alarm").play();
+alert(
+"🔔 New Order Received!"
+);
+
+document
+.getElementById("alarm")
+.pause();
+
+document
+.getElementById("alarm")
+.currentTime = 0;
+
+},1000);
+
 }
-lastOrderTime = newestTime;
-await loadOrders();
-
-}
-
-lastOrderTime = newestTime;
-
-
-}
-
-if(
-lastOrderTime == ""
-){
 
 lastOrderTime =
 newestTime;
 
-}
 }
 
 window.login = function(){
@@ -279,14 +281,14 @@ document.getElementById(
 ).style.display="block";
 
 loadOrders();
+
 checkNewOrders();
 
-setInterval(async ()=>{
+setInterval(
+checkNewOrders,
+5000
+);
 
-await checkNewOrders();
-await loadOrders();
-
-},5000);
 }else{
 
 alert(
@@ -304,15 +306,12 @@ document.getElementById(
 "orders"
 );
 
-ordersDiv.innerHTML =
-"Loading Orders...";
+ordersDiv.innerHTML="";
 
 const snap =
 await getDocs(
 collection(db,"orders")
 );
-
-ordersDiv.innerHTML="";
 
 snap.forEach((d)=>{
 
@@ -337,7 +336,9 @@ ordersDiv.innerHTML += `
 
 <div class="order">
 
-<h3>${data.customerName}</h3>
+<h3>
+${data.customerName}
+</h3>
 
 <p>
 <b>Phone:</b>
@@ -364,32 +365,55 @@ ${data.quantityKg} KG
 ₹${data.totalAmount}
 </p>
 
-<p style="color:${color};font-weight:bold">
+<p style="
+color:${color};
+font-weight:bold;
+">
 Status:
 ${status}
 </p>
 
 <button
 class="pending"
-onclick="updateStatus('${d.id}','Pending')">
+onclick="
+updateStatus(
+'${d.id}',
+'Pending'
+)
+">
 Pending
 </button>
 
 <button
 class="confirmed"
-onclick="updateStatus('${d.id}','Confirmed')">
+onclick="
+updateStatus(
+'${d.id}',
+'Confirmed'
+)
+">
 Confirmed
 </button>
 
 <button
 class="delivery"
-onclick="updateStatus('${d.id}','Out For Delivery')">
+onclick="
+updateStatus(
+'${d.id}',
+'Out For Delivery'
+)
+">
 Out For Delivery
 </button>
 
 <button
 class="delivered"
-onclick="updateStatus('${d.id}','Delivered')">
+onclick="
+updateStatus(
+'${d.id}',
+'Delivered'
+)
+">
 Delivered
 </button>
 
@@ -408,7 +432,9 @@ let updateData = {
 status:status
 };
 
-if(status=="Delivered"){
+if(
+status=="Delivered"
+){
 
 updateData.deliveredAt =
 new Date().toISOString();
@@ -416,13 +442,12 @@ new Date().toISOString();
 }
 
 await updateDoc(
-doc(db,"orders",id),
+doc(
+db,
+"orders",
+id
+),
 updateData
-);
-
-alert(
-"Status Updated: " +
-status
 );
 
 loadOrders();
