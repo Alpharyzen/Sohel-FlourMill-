@@ -215,23 +215,37 @@ data.createdAt;
 });
 
 if(
-lastOrderTime != "" &&
-newestTime != lastOrderTime
+lastOrderTime &&
+newestTime &&
+new Date(newestTime) > new Date(lastOrderTime)
 ){
 
-document
-.getElementById("alarm")
-.play();
 console.log("NEW ORDER DETECTED");
-alert(
-"🔔 New Order Received!"
-);
+
+if(
+document.getElementById("alarm").paused
+){
+
+document.getElementById("alarm").play();
+}
+lastOrderTime = newestTime;
+await loadOrders();
 
 }
+
+lastOrderTime = newestTime;
+
+
+}
+
+if(
+lastOrderTime == ""
+){
 
 lastOrderTime =
 newestTime;
 
+}
 }
 
 window.login = function(){
