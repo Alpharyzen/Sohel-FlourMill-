@@ -127,6 +127,7 @@ Stop Alarm
 
 <audio
 id="alarm"
+controls
 src="alarm.mp3"
 loop>
 </audio>
@@ -174,6 +175,13 @@ document.getElementById(
 ).style.display="block";
 
 loadOrders();
+
+checkNewOrders();
+
+setInterval(
+checkNewOrders,
+5000
+);
 
 }
 async function checkNewOrders(){
