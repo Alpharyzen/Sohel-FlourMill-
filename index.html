@@ -207,7 +207,10 @@ let total = Number(kg) * 50;
 
 try{
 
+const orderId = "ORD" + Date.now();
+
 await addDoc(collection(db,"orders"),{
+orderId:orderId,
 customerName:name,
 phone:phone,
 address:address,
@@ -221,6 +224,7 @@ createdAt:new Date().toISOString()
 
 let message =
 "🌾 Shadab Flour Mill Order%0A%0A" +
+"Order ID: " + orderId + "%0A" +
 "Name: " + name + "%0A" +
 "Phone: " + phone + "%0A" +
 "Product: " + product + "%0A" +
@@ -234,7 +238,11 @@ window.open(
 "_blank"
 );
 
-alert("Order Saved Successfully!");
+alert(
+"Order Saved Successfully!\n\nOrder ID: " +
+orderId +
+"\n\nSave this Order ID for tracking."
+);
 
 }catch(e){
 
