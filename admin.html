@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shadab Flour Mill Admin</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#8B4513;
+}
+
+#loginBox,
+#adminPanel{
+max-width:900px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.loginBtn{
+background:#8B4513;
+color:white;
+width:100%;
+}
+
+.order{
+background:white;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+border-left:5px solid #8B4513;
+}
+
+.delivered{
+background:green;
+color:white;
+}
+
+.mapBtn{
+background:#2196F3;
+color:white;
+margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loginBox">
+
+<h1>Admin Login</h1>
+
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+
+<button class="loginBtn" onclick="login()">
+Login
+</button>
+
+</div>
+
+<div id="adminPanel" style="display:none">
+
+<h1>Shadab Flour Mill Orders</h1>
+
+<div id="orders"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+authDomain: "planning-with-ai-90e6a.firebaseapp.com",
+projectId: "planning-with-ai-90e6a",
+storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
+messagingSenderId: "835817978059",
+appId: "1:835817978059:web:441596d86a28628c3fc34e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.login = async function(){
+
+const u =
+document.getElementById("username").value;
+
+const p =
+document.getElementById("password").value;
+
+if(
+u==="admin" &&
+p==="Alpha123"
+){
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
+
+loadOrders();
+
+}else{
+
+alert("Wrong Login");
+
+}
+
+}
+
+async function loadOrders(){
+
+const ordersDiv =
+document.getElementById("orders");
+
+ordersDiv.innerHTML="Loading...";
+
+const snap =
+await getDocs(collection(db,"orders"));
+
+ordersDiv.innerHTML="";
+
+snap.forEach((d)=>{
+
+const data=d.data();
+
+ordersDiv.innerHTML += `
+<div class="order">
+
+<h3>${data.customerName}</h3>
+
+<p><b>Phone:</b> ${data.phone}</p>
+
+<p><b>Address:</b> ${data.address}</p>
+
+<p><b>Product:</b> ${data.product}</p>
+
+<p><b>Quantity:</b> ${data.quantityKg} KG</p>
+
+<p><b>Total:</b> ₹${data.totalAmount}</p>
+
+<p><b>Status:</b> ${data.status}</p>
+
+<button
+class="delivered"
+onclick="markDelivered('${d.id}')">
+Delivered
+</button>
+
+</div>
+`;
+
+});
+
+}
+
+window.markDelivered =
+async function(id){
+
+await updateDoc(
+doc(db,"orders",id),
+{
+status:"Delivered"
+}
+);
+
+alert("Order Delivered");
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
