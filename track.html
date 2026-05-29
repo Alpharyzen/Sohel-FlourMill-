@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order - Shadab Flour Mill</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f4f4;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#8B4513;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#8B4513;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.order{
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:#fafafa;
+border-left:5px solid #8B4513;
+}
+
+.pending{
+color:#ff9800;
+font-weight:bold;
+}
+
+.confirmed{
+color:#4CAF50;
+font-weight:bold;
+}
+
+.delivery{
+color:#2196F3;
+font-weight:bold;
+}
+
+.delivered{
+color:#009688;
+font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Track Your Order</h1>
+
+<input
+type="tel"
+id="phone"
+placeholder="Enter Mobile Number">
+
+<button onclick="trackOrder()">
+Track Order
+</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+authDomain: "planning-with-ai-90e6a.firebaseapp.com",
+projectId: "planning-with-ai-90e6a",
+storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
+messagingSenderId: "835817978059",
+appId: "1:835817978059:web:441596d86a28628c3fc34e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.trackOrder = async function(){
+
+const phone =
+document.getElementById("phone").value.trim();
+
+if(!phone){
+alert("Enter Mobile Number");
+return;
+}
+
+const snap =
+await getDocs(collection(db,"orders"));
+
+let html = "";
+
+snap.forEach((doc)=>{
+
+const data = doc.data();
+
+if(data.phone == phone){
+
+let statusClass = "pending";
+
+if(data.status == "Confirmed"){
+statusClass = "confirmed";
+}
+
+if(data.status == "Out For Delivery"){
+statusClass = "delivery";
+}
+
+if(data.status == "Delivered"){
+statusClass = "delivered";
+}
+
+html += `
+
+<div class="order">
+
+<h3>${data.customerName || ""}</h3>
+
+<p>
+<b>Order ID:</b>
+${data.orderId || "N/A"}
+</p>
+
+<p>
+<b>Product:</b>
+${data.product || ""}
+</p>
+
+<p>
+<b>Quantity:</b>
+${data.quantityKg || 0} KG
+</p>
+
+<p>
+<b>Total:</b>
+₹${data.totalAmount || 0}
+</p>
+
+<p class="${statusClass}">
+<b>Status:</b>
+${data.status || "Pending"}
+</p>
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById("result").innerHTML =
+html || "<h3>No Orders Found</h3>";
+
+};
+
+</script>
+
+</body>
+</html>
