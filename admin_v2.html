@@ -180,6 +180,8 @@ async function loadOrders(){
 const ordersDiv =
 document.getElementById("orders");
 
+ordersDiv.innerHTML="";
+
 ordersDiv.innerHTML = "Loading Orders...";
 
 const snap =
@@ -293,7 +295,7 @@ alert(
 "Status Updated: " + status
 );
 
-location.reload();
+loadOrders();
 
 };
 
