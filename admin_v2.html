@@ -131,7 +131,9 @@ controls
 src="alarm.mp3"
 loop>
 </audio>
-
+<button onclick="document.getElementById('alarm').play()">
+TEST ALARM
+</button>
 </div>
 
 <script type="module">
@@ -158,7 +160,7 @@ appId: "1:835817978059:web:441596d86a28628c3fc34e"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-let lastOrderCount = 0;
+let lastOrderTime = "";
 
 if(
 localStorage.getItem("adminLoggedIn")
@@ -178,10 +180,12 @@ loadOrders();
 
 checkNewOrders();
 
-setInterval(
-checkNewOrders,
-5000
-);
+setInterval(async ()=>{
+
+await checkNewOrders();
+await loadOrders();
+
+},5000);
 
 }
 async function checkNewOrders(){
@@ -191,9 +195,28 @@ await getDocs(
 collection(db,"orders")
 );
 
+let newestTime = "";
+
+snap.forEach((d)=>{
+
+const data = d.data();
+
+if(data.createdAt){
+
 if(
-lastOrderCount != 0 &&
-snap.size > lastOrderCount
+data.createdAt > newestTime
+){
+newestTime =
+data.createdAt;
+}
+
+}
+
+});
+
+if(
+lastOrderTime != "" &&
+newestTime != lastOrderTime
 ){
 
 document
@@ -206,8 +229,8 @@ alert(
 
 }
 
-lastOrderCount =
-snap.size;
+lastOrderTime =
+newestTime;
 
 }
 
@@ -244,10 +267,12 @@ document.getElementById(
 loadOrders();
 checkNewOrders();
 
-setInterval(
-checkNewOrders,
-5000
-);
+setInterval(async ()=>{
+
+await checkNewOrders();
+await loadOrders();
+
+},5000);
 }else{
 
 alert(
