@@ -16,22 +16,36 @@ SHADAB FLOUR MILL
 </title>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
 rel="stylesheet">
 
 <style>
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Montserrat',sans-serif;
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
 }
 
 body{
+
 background:#000;
 color:#fff;
+
+font-family:
+'Montserrat',
+sans-serif;
+
 overflow-x:hidden;
+
 }
 
 /* HEADER */
@@ -41,57 +55,48 @@ overflow-x:hidden;
 height:120px;
 
 background:
-url("images/header-wheat.jpg")
-center center/cover;
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+url("images/header-wheat.jpg");
 
-position:relative;
+background-size:cover;
+background-position:center;
 
 display:flex;
 
-align-items:center;
-
 justify-content:space-between;
 
-padding:0 25px;
+align-items:center;
 
-}
-
-.header::before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-background:
-rgba(0,0,0,.45);
+padding:0 40px;
 
 }
 
 .logo{
 
-position:relative;
+font-family:
+'Cinzel',
+serif;
 
-z-index:2;
+font-size:30px;
 
-font-size:20px;
+font-weight:700;
 
-font-weight:800;
+letter-spacing:3px;
 
-letter-spacing:2px;
+line-height:1.1;
+
+color:white;
 
 }
 
 .nav{
 
-position:relative;
-
-z-index:2;
-
 display:flex;
 
-gap:25px;
+gap:40px;
 
 }
 
@@ -101,11 +106,21 @@ color:white;
 
 text-decoration:none;
 
-font-size:14px;
+font-size:15px;
 
-font-weight:700;
+font-weight:600;
 
-letter-spacing:1px;
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+transition:.3s;
+
+}
+
+.nav a:hover{
+
+opacity:.7;
 
 }
 
@@ -113,75 +128,63 @@ letter-spacing:1px;
 
 .hero{
 
-position:relative;
+padding-top:70px;
 
-min-height:1500px;
+padding-bottom:80px;
 
 background:#000;
 
-overflow:hidden;
-
 }
 
-/* LEFT TEXT */
+/* TITLE */
 
-.topText{
-
-position:absolute;
-
-top:220px;
-
-left:50px;
-
-width:430px;
+.heroTitle{
 
 text-align:center;
 
-font-size:20px;
+max-width:900px;
 
-font-weight:700;
+margin:auto;
 
-line-height:1.6;
+font-size:22px;
 
-letter-spacing:1px;
+font-weight:600;
+
+line-height:1.8;
+
+letter-spacing:2px;
 
 text-transform:uppercase;
 
 }
 
-.middleText{
+/* PRODUCT ROW */
 
-position:absolute;
+.productsRow{
 
-top:760px;
+margin-top:90px;
 
-left:50px;
+display:flex;
 
-width:430px;
+justify-content:center;
 
-text-align:center;
+gap:35px;
 
-font-size:20px;
-
-font-weight:700;
-
-line-height:1.6;
-
-letter-spacing:1px;
-
-text-transform:uppercase;
+flex-wrap:wrap;
 
 }
 
-/* IMAGE PILLS */
+.productCard{
 
-.pill{
+width:170px;
 
-position:absolute;
+height:390px;
+
+border-radius:90px;
 
 overflow:hidden;
 
-border-radius:80px;
+position:relative;
 
 box-shadow:
 0 0 25px
@@ -191,14 +194,14 @@ transition:.4s;
 
 }
 
-.pill:hover{
+.productCard:hover{
 
 transform:
 translateY(-10px);
 
 }
 
-.pill img{
+.productCard img{
 
 width:100%;
 
@@ -208,11 +211,11 @@ object-fit:cover;
 
 }
 
-.label{
+.productName{
 
 position:absolute;
 
-bottom:20px;
+bottom:25px;
 
 left:50%;
 
@@ -225,36 +228,76 @@ font-weight:700;
 
 letter-spacing:2px;
 
+color:white;
+
 text-shadow:
 0 0 10px black;
 
 }
 
-/* WHEAT */
+/* MOBILE */
 
-.wheat{
+@media(max-width:900px){
 
-width:140px;
+.header{
 
-height:360px;
+padding:0 15px;
 
-top:130px;
-
-right:260px;
+height:110px;
 
 }
 
-/* BAJRA */
+.logo{
 
-.bajra{
+font-size:18px;
 
-width:150px;
+max-width:130px;
 
-height:430px;
+}
 
-top:360px;
+.nav{
 
-right:40px;
+gap:15px;
+
+}
+
+.nav a{
+
+font-size:11px;
+
+}
+
+.heroTitle{
+
+font-size:16px;
+
+width:90%;
+
+}
+
+.productsRow{
+
+gap:12px;
+
+padding:0 10px;
+
+}
+
+.productCard{
+
+width:105px;
+
+height:230px;
+
+border-radius:60px;
+
+}
+
+.productName{
+
+font-size:14px;
+
+}
 
 }
 
@@ -268,27 +311,28 @@ right:40px;
 
 <div class="logo">
 
-SHADAB FLOUR MILL
+SHADAB<br>
+FLOURMILL
 
 </div>
 
 <div class="nav">
 
-<a href="#">
+<a href="#products">
 
-PRODUCT
+Product
 
 </a>
 
 <a href="order.html">
 
-ORDER
+Order
 
 </a>
 
 <a href="https://wa.me/918459925150">
 
-WHATSAPP
+WhatsApp
 
 </a>
 
@@ -298,32 +342,26 @@ WHATSAPP
 
 <section class="hero">
 
-<div class="topText">
+<div class="heroTitle">
 
-DELIVERING PREMIUM QUALITY
-WHEAT AND FLOUR WITH A
-COMMITMENT TO
+DELIVERING PREMIUM QUALITY WHEAT
+AND FLOUR WITH A COMMITMENT TO
 EXCELLENCE
 
 </div>
 
-<div class="middleText">
-
-HYGIENICALLY PROCESSED TO
-ENSURE FRESHNESS,
-PURITY AND
-CONSISTENCY
-
-</div>
+<div
+class="productsRow"
+id="products">
 
 <!-- WHEAT -->
 
-<div class="pill wheat">
+<div class="productCard">
 
 <img
 src="images/wheat.jpg">
 
-<div class="label">
+<div class="productName">
 
 WHEAT
 
@@ -331,14 +369,29 @@ WHEAT
 
 </div>
 
+<!-- JAWARI -->
+
+<div class="productCard">
+
+<img
+src="images/jawari.jpg">
+
+<div class="productName">
+
+JAWARI
+
+</div>
+
+</div>
+
 <!-- BAJRA -->
 
-<div class="pill bajra">
+<div class="productCard">
 
 <img
 src="images/bajra.jpg">
 
-<div class="label">
+<div class="productName">
 
 BAJRA
 
@@ -348,12 +401,12 @@ BAJRA
 
 <!-- BESAN -->
 
-<div class="pill besan">
+<div class="productCard">
 
 <img
 src="images/besan.jpg">
 
-<div class="label">
+<div class="productName">
 
 BESAN
 
@@ -361,64 +414,43 @@ BESAN
 
 </div>
 
-<!-- JAWARI -->
-
-<div class="pill jawari">
-
-<img
-src="images/jawari.jpg">
-
-<div class="label">
-
-JAWARI
-
 </div>
+
+<!-- DESCRIPTION -->
+
+<div
+class="heroTitle"
+style="
+margin-top:80px;
+max-width:900px;
+font-size:18px;
+">
+
+HYGIENICALLY PROCESSED TO ENSURE
+FRESHNESS, PURITY AND CONSISTENCY.
+
+MADE FROM CAREFULLY SELECTED
+PREMIUM QUALITY GRAINS.
 
 </div>
 
 <style>
 
-/* BESAN */
+.orderSection{
 
-.besan{
+margin-top:80px;
 
-width:140px;
+display:flex;
 
-height:320px;
-
-top:700px;
-
-right:250px;
-
-}
-
-/* JAWARI */
-
-.jawari{
-
-width:150px;
-
-height:430px;
-
-top:1050px;
-
-right:40px;
-
-}
-
-/* ORDER BUTTON */
-
-.orderWrap{
-
-position:absolute;
-
-top:1120px;
-
-left:180px;
+justify-content:center;
 
 }
 
 .orderBtn{
+
+width:260px;
+
+height:95px;
 
 display:flex;
 
@@ -426,19 +458,15 @@ align-items:center;
 
 justify-content:center;
 
-width:240px;
+border:3px solid white;
 
-height:95px;
-
-border:3px solid #fff;
-
-border-radius:60px;
+border-radius:70px;
 
 color:white;
 
 text-decoration:none;
 
-font-size:22px;
+font-size:24px;
 
 font-weight:700;
 
@@ -462,9 +490,29 @@ rgba(255,255,255,.35);
 
 }
 
+@media(max-width:900px){
+
+.orderSection{
+
+margin-top:50px;
+
+}
+
+.orderBtn{
+
+width:190px;
+
+height:80px;
+
+font-size:18px;
+
+}
+
+}
+
 </style>
 
-<div class="orderWrap">
+<div class="orderSection">
 
 <a
 href="order.html"
@@ -476,45 +524,52 @@ ORDER NOW
 
 </div>
 
-</section>
-
 <!-- SUMMARY -->
 
 <section
 style="
-background:#000;
-padding:80px 25px;
+padding:90px 25px;
 text-align:center;
-color:white;
+background:#000;
 ">
 
-<p
+<h2
 style="
-max-width:1100px;
-margin:auto;
-font-size:14px;
-line-height:2.2;
-letter-spacing:1px;
+font-size:30px;
+font-weight:700;
+letter-spacing:3px;
+margin-bottom:40px;
 ">
 
-AT OUR FLOUR MILL, WE ARE COMMITTED TO PROVIDING CLEAN,
+ABOUT OUR QUALITY
+
+</h2>
+
+<div
+style="
+max-width:1000px;
+margin:auto;
+font-size:15px;
+line-height:2.4;
+letter-spacing:1px;
+color:#d5d5d5;
+">
+
+AT OUR FLOUR MILL,
+WE ARE COMMITTED TO PROVIDING CLEAN,
 FRESH AND HYGIENICALLY PROCESSED PRODUCTS.
 
 EVERY BATCH OF WHEAT FLOUR,
 JAWARI FLOUR,
-BAJRA FLOUR AND BESAN IS CAREFULLY
-SELECTED, TESTED AND PACKED TO MAINTAIN
-THE HIGHEST QUALITY STANDARDS.
+BAJRA FLOUR AND BESAN IS CAREFULLY SELECTED,
+TESTED AND PACKED TO MAINTAIN HIGH QUALITY STANDARDS.
 
 CUSTOMER SATISFACTION IS OUR PRIORITY.
-
-IF A PRODUCT ARRIVES DAMAGED OR DOES NOT
-MEET EXPECTATIONS, WE PROVIDE REPLACEMENT SUPPORT.
 
 WE BELIEVE IN DELIVERING PURITY,
 FRESHNESS AND TRUST WITH EVERY ORDER.
 
-</p>
+</div>
 
 </section>
 
@@ -523,16 +578,15 @@ FRESHNESS AND TRUST WITH EVERY ORDER.
 <section
 style="
 background:#000;
-padding:20px 25px 100px;
 text-align:center;
-color:white;
+padding:20px 20px 100px;
 ">
 
 <h2
 style="
 font-size:28px;
 font-weight:700;
-letter-spacing:3px;
+letter-spacing:4px;
 margin-bottom:20px;
 ">
 
@@ -540,108 +594,59 @@ WHATSAPP
 
 </h2>
 
+<a
+href="https://wa.me/918459925150"
+style="
+text-decoration:none;
+color:white;
+">
+
 <h1
 style="
 font-size:42px;
 font-weight:800;
-letter-spacing:4px;
+letter-spacing:5px;
 ">
 
 8459925150
 
 </h1>
 
+</a>
+
 </section>
 
 <style>
 
+.footerTop{
+
+border-top:
+1px solid
+rgba(255,255,255,.08);
+
+padding-top:60px;
+
+}
+
 @media(max-width:900px){
 
-.hero{
+section h2{
 
-min-height:2200px;
-
-}
-
-.topText{
-
-left:50%;
-transform:translateX(-50%);
-width:90%;
-top:170px;
-font-size:17px;
+font-size:22px !important;
 
 }
 
-.middleText{
+section h1{
 
-left:50%;
-transform:translateX(-50%);
-width:90%;
-top:1080px;
-font-size:17px;
+font-size:30px !important;
 
 }
 
-.wheat{
+section div{
 
-top:420px;
-left:50%;
-transform:translateX(-50%);
-right:auto;
+font-size:13px !important;
 
-}
-
-.bajra{
-
-top:820px;
-left:50%;
-transform:translateX(-50%);
-right:auto;
-
-}
-
-.besan{
-
-top:1280px;
-left:50%;
-transform:translateX(-50%);
-right:auto;
-
-}
-
-.jawari{
-
-top:1680px;
-left:50%;
-transform:translateX(-50%);
-right:auto;
-
-}
-
-.orderWrap{
-
-left:50%;
-transform:translateX(-50%);
-top:1980px;
-
-}
-
-}
-
-@media(max-width:500px){
-
-.orderBtn{
-
-width:190px;
-height:85px;
-font-size:20px;
-
-}
-
-.label{
-
-font-size:15px;
+line-height:2.1 !important;
 
 }
 
@@ -649,22 +654,23 @@ font-size:15px;
 
 </style>
 
+<div class="footerTop">
+
 <!-- FOOTER -->
 
 <footer
 style="
 background:#000;
-border-top:1px solid rgba(255,255,255,.08);
 padding:60px 20px;
 text-align:center;
 ">
 
 <h2
 style="
-font-size:28px;
+font-size:32px;
 font-weight:800;
-letter-spacing:3px;
-margin-bottom:15px;
+letter-spacing:4px;
+margin-bottom:20px;
 ">
 
 SHADAB FLOUR MILL
@@ -673,20 +679,25 @@ SHADAB FLOUR MILL
 
 <p
 style="
+max-width:800px;
+margin:auto;
 color:#bdbdbd;
 font-size:14px;
-line-height:2;
-max-width:700px;
-margin:auto;
+line-height:2.2;
+letter-spacing:1px;
 ">
 
-PREMIUM QUALITY
+PREMIUM QUALITY WHEAT FLOUR
 
-WHEAT FLOUR
+<br><br>
 
 JAWARI FLOUR
 
+<br><br>
+
 BAJRA FLOUR
+
+<br><br>
 
 BESAN
 
@@ -694,17 +705,30 @@ BESAN
 
 HOME DELIVERY AVAILABLE
 
+<br>
+
 KONDHWA • PUNE
 
 </p>
 
-<br>
+<div
+style="
+margin-top:35px;
+width:120px;
+height:1px;
+background:rgba(255,255,255,.15);
+margin-left:auto;
+margin-right:auto;
+">
+
+</div>
 
 <div
 style="
+margin-top:25px;
 color:#666;
 font-size:13px;
-letter-spacing:1px;
+letter-spacing:2px;
 ">
 
 © 2026 SHADAB FLOUR MILL
@@ -712,6 +736,36 @@ letter-spacing:1px;
 </div>
 
 </footer>
+
+<style>
+
+@media(max-width:900px){
+
+footer{
+
+padding:45px 20px;
+
+}
+
+footer h2{
+
+font-size:24px !important;
+
+letter-spacing:2px !important;
+
+}
+
+footer p{
+
+font-size:12px !important;
+
+line-height:2 !important;
+
+}
+
+}
+
+</style>
 
 </body>
 
