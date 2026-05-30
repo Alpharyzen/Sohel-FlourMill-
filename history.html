@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Delivery History</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+padding:20px;
+}
+
+.topBar{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.backBtn{
+background:#8B4513;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1{
+color:#8B4513;
+}
+
+.summary{
+font-weight:bold;
+margin:10px 0;
+color:#4CAF50;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topBar">
+
+<button
+class="backBtn"
+onclick="location.href='admin_v2.html'">
+
+← Orders
+
+</button>
+
+<h1>
+📜 7 Day Delivery History
+</h1>
+
+</div>
+
+<div id="history">
+
+Loading History...
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+authDomain: "planning-with-ai-90e6a.firebaseapp.com",
+projectId: "planning-with-ai-90e6a",
+storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
+messagingSenderId: "835817978059",
+appId: "1:835817978059:web:441596d86a28628c3fc34e"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+async function loadHistory(){
+
+const snap =
+await getDocs(
+collection(db,"orders")
+);
+
+const groups = {};
+
+snap.forEach((d)=>{
+
+const data =
+d.data();
+
+if(
+data.status != "Delivered" ||
+!data.deliveredAt
+){
+return;
+}
+
+const days =
+(
+new Date() -
+new Date(data.deliveredAt)
+)
+/
+1000
+/
+60
+/
+60
+/
+24;
+
+if(days > 7){
+return;
+}
+
+const date =
+new Date(
+data.deliveredAt
+).toLocaleDateString();
+
+if(!groups[date]){
+
+groups[date] = {
+count:0,
+revenue:0,
+orders:[]
+};
+
+}
+
+groups[date].count++;
+
+groups[date].revenue +=
+Number(
+data.totalAmount || 0
+);
+
+groups[date].orders.push(data);
+
+});
+
+let html = "";
+
+Object.keys(groups)
+.reverse()
+.forEach((date)=>{
+
+const day =
+groups[date];
+
+html += `
+
+<div class="card">
+
+<h2>
+📅 ${date}
+</h2>
+
+<div class="summary">
+
+Deliveries:
+${day.count}
+
+<br>
+
+Revenue:
+₹${day.revenue}
+
+</div>
+
+<hr>
+
+`;
+
+day.orders.forEach((o)=>{
+
+html += `
+
+<p>
+
+👤 ${o.customerName}
+
+<br>
+
+🌾 ${o.product}
+
+<br>
+
+⚖ ${o.quantityKg} KG
+
+<br>
+
+💰 ₹${o.totalAmount}
+
+</p>
+
+<hr>
+
+`;
+
+});
+
+html += `
+
+</div>
+
+`;
+
+});
+
+document
+.getElementById("history")
+.innerHTML =
+
+html ||
+
+"<div class='card'>No Delivery History Found</div>";
+
+}
+
+loadHistory();
+
+</script>
+
+</body>
+</html>
