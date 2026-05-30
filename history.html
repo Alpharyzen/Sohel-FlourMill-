@@ -119,8 +119,8 @@ const data =
 d.data();
 
 if(
-data.status != "Delivered" ||
-!data.deliveredAt
+status=="Delivered" ||
+status=="Cancelled"
 ){
 return;
 }
