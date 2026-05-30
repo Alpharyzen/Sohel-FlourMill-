@@ -126,7 +126,9 @@ import {
 getFirestore,
 collection,
 getDocs,
-onSnapshot
+onSnapshot,
+updateDoc,
+doc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
@@ -265,9 +267,12 @@ emoji="🔵";
 }
 
 if(
-data.status==
-"Delivered"
+status=="Delivered"
+||
+status=="Cancelled"
 ){
+return;
+}{
 
 statusClass=
 "delivered";
@@ -358,7 +363,43 @@ ${emoji}
 ${data.status}
 
 </div>
+${
+data.status=="Pending"
+&&
+(
+(
+new Date()
+-
+new Date(data.createdAt)
+)
+/
+1000
+/
+60
+<5
+)
+?
 
+`
+
+<button
+onclick="
+cancelOrder(
+'${data.orderId}'
+)
+">
+
+❌ Cancel Order
+
+</button>
+
+`
+
+:
+
+""
+
+}
 </div>
 
 `;
@@ -369,7 +410,61 @@ ordersDiv.innerHTML =
 html;
 
 };
+window.cancelOrder =
+async function(orderId){
 
+const snap =
+await getDocs(
+collection(
+db,
+"orders"
+)
+);
+
+for(
+const d
+of
+snap.docs
+){
+
+const data =
+d.data();
+
+if(
+data.orderId==
+orderId
+){
+
+await updateDoc(
+
+doc(
+db,
+"orders",
+d.id
+),
+
+{
+
+status:
+"Cancelled",
+
+cancelled:true
+
+}
+
+);
+
+alert(
+"Order Cancelled"
+);
+
+break;
+
+}
+
+}
+
+};
 window.onload =
 function(){
 
