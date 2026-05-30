@@ -385,6 +385,12 @@ const data=d.data();
 const status =
 data.status || "Pending";
 
+if(
+status=="Delivered"
+){
+return;
+}
+
 let color =
 "#ff9800";
 
@@ -515,7 +521,7 @@ id
 updateData
 );
 
-loadOrders();
+await loadOrders();
 
 };
 
