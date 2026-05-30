@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shadab Flour Mill Admin</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+Shadab Flour Mill Admin
+</title>
 
 <style>
 
@@ -14,13 +20,13 @@ padding:20px;
 }
 
 h1{
-text-align:center;
 color:#8B4513;
+margin:0;
 }
 
 #loginBox,
 #adminPanel{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 background:white;
 padding:20px;
@@ -82,11 +88,14 @@ padding:15px;
 margin-top:15px;
 border-radius:10px;
 border-left:5px solid #8B4513;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
 }
+
 .topBar{
 display:flex;
 align-items:center;
 gap:15px;
+margin-bottom:20px;
 }
 
 .menuBtn{
@@ -120,6 +129,19 @@ font-size:18px;
 left:0;
 }
 
+.products{
+background:#fafafa;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+}
+
+.timeBox{
+font-size:13px;
+color:#666;
+margin-top:5px;
+}
+
 </style>
 
 </head>
@@ -128,7 +150,9 @@ left:0;
 
 <div id="loginBox">
 
-<h1>Admin Login</h1>
+<h1>
+Admin Login
+</h1>
 
 <input
 id="username"
@@ -177,7 +201,9 @@ onclick="logout()">
 <button
 class="menuBtn"
 onclick="openMenu()">
+
 ☰
+
 </button>
 
 <h1>
@@ -203,13 +229,16 @@ src="alarm.mp3"
 loop>
 </audio>
 
-<div id="orders"></div>
+<div id="orders">
+
+Loading Orders...
 
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getFirestore,
@@ -217,26 +246,43 @@ collection,
 getDocs,
 doc,
 updateDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
-authDomain: "planning-with-ai-90e6a.firebaseapp.com",
-projectId: "planning-with-ai-90e6a",
-storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
-messagingSenderId: "835817978059",
-appId: "1:835817978059:web:441596d86a28628c3fc34e"
+
+apiKey:
+"AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+
+authDomain:
+"planning-with-ai-90e6a.firebaseapp.com",
+
+projectId:
+"planning-with-ai-90e6a",
+
+storageBucket:
+"planning-with-ai-90e6a.firebasestorage.app",
+
+messagingSenderId:
+"835817978059",
+
+appId:
+"1:835817978059:web:441596d86a28628c3fc34e"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
 
 let lastOrderTime = "";
 
 if(
-localStorage.getItem("adminLoggedIn")
-==
-"true"
+localStorage.getItem(
+"adminLoggedIn"
+)=="true"
 ){
 
 document.getElementById(
@@ -262,21 +308,26 @@ async function checkNewOrders(){
 
 const snap =
 await getDocs(
-collection(db,"orders")
+collection(
+db,
+"orders"
+)
 );
 
-let newestTime = "";
+let newestTime="";
 
 snap.forEach((d)=>{
 
-const data = d.data();
+const data=d.data();
 
 if(
 data.createdAt &&
 data.createdAt > newestTime
 ){
+
 newestTime =
 data.createdAt;
+
 }
 
 });
@@ -289,7 +340,9 @@ new Date(lastOrderTime)
 ){
 
 document
-.getElementById("alarm")
+.getElementById(
+"alarm"
+)
 .play();
 
 setTimeout(()=>{
@@ -299,11 +352,15 @@ alert(
 );
 
 document
-.getElementById("alarm")
+.getElementById(
+"alarm"
+)
 .pause();
 
 document
-.getElementById("alarm")
+.getElementById(
+"alarm"
+)
 .currentTime = 0;
 
 },1000);
@@ -315,7 +372,8 @@ newestTime;
 
 }
 
-window.login = function(){
+window.login =
+function(){
 
 const u =
 document.getElementById(
@@ -375,15 +433,36 @@ ordersDiv.innerHTML="";
 
 const snap =
 await getDocs(
-collection(db,"orders")
+collection(
+db,
+"orders"
+)
 );
+
+const orders=[];
 
 snap.forEach((d)=>{
 
-const data=d.data();
+orders.push({
+
+id:d.id,
+...d.data()
+
+});
+
+});
+
+orders.sort(
+(a,b)=>
+new Date(b.createdAt) -
+new Date(a.createdAt)
+);
+
+orders.forEach((data)=>{
 
 const status =
-data.status || "Pending";
+data.status ||
+"Pending";
 
 if(
 status=="Delivered"
@@ -394,13 +473,19 @@ return;
 let color =
 "#ff9800";
 
-if(status=="Confirmed")
+if(
+status=="Confirmed"
+)
 color="#4CAF50";
 
-if(status=="Out For Delivery")
+if(
+status=="Out For Delivery"
+)
 color="#2196F3";
 
-if(status=="Delivered")
+if(
+status=="Delivered"
+)
 color="#009688";
 
 ordersDiv.innerHTML += `
@@ -408,84 +493,140 @@ ordersDiv.innerHTML += `
 <div class="order">
 
 <h3>
-${data.customerName}
+👤 ${data.customerName}
 </h3>
 
+<div class="timeBox">
+
+📅
+${new Date(
+data.createdAt
+).toLocaleDateString()}
+
+<br>
+
+⏰
+${new Date(
+data.createdAt
+).toLocaleTimeString()}
+
+</div>
+
 <p>
+
 <b>Phone:</b>
+
 ${data.phone}
+
 </p>
 
 <p>
+
 <b>Address:</b>
+
 ${data.address}
+
+</p>
+
+<div class="products">
+
+<b>Products:</b>
+
+<ul>
+
+${(data.items || []).map(item => `
+
+<li>
+
+${item.product}
+-
+${item.qty} KG
+
+</li>
+
+`).join("")}
+
+</ul>
+
+</div>
+
+<p>
+
+<b>Total KG:</b>
+
+${data.totalKg || 0}
+
 </p>
 
 <p>
-<b>Product:</b>
-${data.product}
-</p>
 
-<p>
-<b>Quantity:</b>
-${data.quantityKg} KG
-</p>
-
-<p>
 <b>Total:</b>
-₹${data.totalAmount}
+
+₹${data.totalAmount || 0}
+
 </p>
 
-<p style="
+<p
+style="
 color:${color};
 font-weight:bold;
 ">
+
 Status:
 ${status}
+
 </p>
 
 <button
 class="pending"
 onclick="
 updateStatus(
-'${d.id}',
+'${data.id}',
 'Pending'
 )
 ">
+
 Pending
+
 </button>
 
 <button
 class="confirmed"
 onclick="
 updateStatus(
-'${d.id}',
+'${data.id}',
 'Confirmed'
 )
 ">
+
 Confirmed
+
 </button>
 
 <button
 class="delivery"
 onclick="
 updateStatus(
-'${d.id}',
+'${data.id}',
 'Out For Delivery'
 )
 ">
+
 Out For Delivery
+
 </button>
 
 <button
 class="delivered"
 onclick="
 updateStatus(
-'${d.id}',
+'${data.id}',
 'Delivered'
 )
 ">
+
 Delivered
+
 </button>
 
 </div>
@@ -497,10 +638,15 @@ Delivered
 }
 
 window.updateStatus =
-async function(id,status){
+async function(
+id,
+status
+){
 
 let updateData = {
+
 status:status
+
 };
 
 if(
@@ -508,17 +654,21 @@ status=="Delivered"
 ){
 
 updateData.deliveredAt =
-new Date().toISOString();
+new Date()
+.toISOString();
 
 }
 
 await updateDoc(
+
 doc(
 db,
 "orders",
 id
 ),
+
 updateData
+
 );
 
 await loadOrders();
