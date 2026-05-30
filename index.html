@@ -31,8 +31,8 @@ scroll-behavior:smooth;
 
 body{
 background:#ffffff;
-color:#222;
 overflow-x:hidden;
+color:#222;
 }
 
 /* NAVBAR */
@@ -67,7 +67,7 @@ z-index:9999;
 
 box-shadow:
 0 5px 20px
-rgba(0,0,0,.06);
+rgba(0,0,0,.05);
 
 }
 
@@ -85,7 +85,7 @@ color:#2196F3;
 
 display:flex;
 
-gap:20px;
+gap:18px;
 
 }
 
@@ -136,7 +136,7 @@ padding:20px;
 
 .heroContent{
 
-max-width:800px;
+max-width:700px;
 
 color:white;
 
@@ -147,7 +147,7 @@ fadeUp 1s ease;
 
 .heroContent h1{
 
-font-size:52px;
+font-size:48px;
 
 font-weight:800;
 
@@ -161,13 +161,11 @@ font-size:18px;
 
 line-height:1.8;
 
-opacity:.95;
+margin-bottom:25px;
 
 }
 
 .heroButtons{
-
-margin-top:25px;
 
 display:flex;
 
@@ -188,17 +186,17 @@ linear-gradient(
 #64B5F6
 );
 
-border:none;
-
 padding:16px 35px;
 
-border-radius:50px;
+border:none;
 
-color:white;
+border-radius:50px;
 
 font-size:16px;
 
 font-weight:700;
+
+color:white;
 
 cursor:pointer;
 
@@ -221,19 +219,19 @@ translateY(-4px);
 
 background:white;
 
+color:#2196F3;
+
 padding:16px 35px;
 
 border-radius:50px;
 
 text-decoration:none;
 
-color:#2196F3;
-
 font-weight:700;
 
 }
 
-/* PRODUCTS */
+/* SECTION */
 
 .section{
 
@@ -243,15 +241,19 @@ padding:70px 20px;
 
 .sectionTitle{
 
-text-align:center;
-
 font-size:34px;
 
 font-weight:800;
 
-margin-bottom:30px;
+text-align:center;
+
+margin-bottom:40px;
+
+color:#222;
 
 }
+
+/* PRODUCT SLIDER */
 
 .productSlider{
 
@@ -261,9 +263,9 @@ gap:20px;
 
 overflow-x:auto;
 
-scroll-behavior:smooth;
+padding-bottom:15px;
 
-padding-bottom:10px;
+scrollbar-width:none;
 
 }
 
@@ -275,15 +277,14 @@ display:none;
 
 min-width:280px;
 
-background:white;
+background:#ffffff;
 
 border-radius:30px;
 
 overflow:hidden;
 
 box-shadow:
-0 10px 30px
-rgba(0,0,0,.08);
+0 8px 25px rgba(0,0,0,.08);
 
 transition:.35s;
 
@@ -295,6 +296,9 @@ flex-shrink:0;
 
 transform:
 translateY(-8px);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.12);
 
 }
 
@@ -310,7 +314,7 @@ object-fit:cover;
 
 .productInfo{
 
-padding:20px;
+padding:18px;
 
 text-align:center;
 
@@ -320,7 +324,7 @@ text-align:center;
 
 font-size:22px;
 
-margin-bottom:10px;
+margin-bottom:8px;
 
 }
 
@@ -328,26 +332,22 @@ margin-bottom:10px;
 
 color:#666;
 
+font-weight:600;
+
 }
+
+/* ANIMATION */
 
 @keyframes fadeUp{
 
 from{
-
 opacity:0;
-
-transform:
-translateY(50px);
-
+transform:translateY(40px);
 }
 
 to{
-
 opacity:1;
-
-transform:
-translateY(0);
-
+transform:translateY(0);
 }
 
 }
@@ -361,9 +361,7 @@ translateY(0);
 <div class="navbar">
 
 <div class="logo">
-
 SHADAB FLOUR MILL
-
 </div>
 
 <div class="navLinks">
@@ -389,9 +387,7 @@ Orders
 <div class="heroContent">
 
 <h1>
-
 SHADAB FLOUR MILL
-
 </h1>
 
 <p>
@@ -452,9 +448,13 @@ Our Products
 
 <div class="productInfo">
 
-<h3>Wheat Flour</h3>
+<h3>
+Wheat Flour
+</h3>
 
-<p>Premium Wheat Quality</p>
+<p>
+₹50 / KG
+</p>
 
 </div>
 
@@ -466,9 +466,13 @@ Our Products
 
 <div class="productInfo">
 
-<h3>Jowar Flour</h3>
+<h3>
+Jowar Flour
+</h3>
 
-<p>Healthy Daily Choice</p>
+<p>
+₹50 / KG
+</p>
 
 </div>
 
@@ -480,9 +484,13 @@ Our Products
 
 <div class="productInfo">
 
-<h3>Bajra Flour</h3>
+<h3>
+Bajra Flour
+</h3>
 
-<p>Rich In Nutrition</p>
+<p>
+₹50 / KG
+</p>
 
 </div>
 
@@ -494,9 +502,13 @@ Our Products
 
 <div class="productInfo">
 
-<h3>Dal Flour</h3>
+<h3>
+Dal Flour
+</h3>
 
-<p>Fresh Premium Product</p>
+<p>
+₹50 / KG
+</p>
 
 </div>
 
@@ -588,9 +600,19 @@ rgba(33,150,243,.15);
 
 font-size:20px;
 
-margin-bottom:15px;
+margin-bottom:12px;
 
 color:#2196F3;
+
+}
+
+.qtyLabel{
+
+font-size:14px;
+
+color:#666;
+
+margin-bottom:10px;
 
 }
 
@@ -737,8 +759,12 @@ translateY(-3px);
 <div class="orderCard">
 
 <h3>
-Wheat Flour
+Wheat Flour (₹50/KG)
 </h3>
+
+<div class="qtyLabel">
+Enter Quantity In KG
+</div>
 
 <input
 type="number"
@@ -746,6 +772,7 @@ id="wheatQty"
 class="qtyInput"
 value="0"
 min="0"
+placeholder="Enter KG"
 oninput="calculateTotal()">
 
 </div>
@@ -753,8 +780,12 @@ oninput="calculateTotal()">
 <div class="orderCard">
 
 <h3>
-Jowar Flour
+Jowar Flour (₹50/KG)
 </h3>
+
+<div class="qtyLabel">
+Enter Quantity In KG
+</div>
 
 <input
 type="number"
@@ -762,6 +793,7 @@ id="jowarQty"
 class="qtyInput"
 value="0"
 min="0"
+placeholder="Enter KG"
 oninput="calculateTotal()">
 
 </div>
@@ -769,8 +801,12 @@ oninput="calculateTotal()">
 <div class="orderCard">
 
 <h3>
-Bajra Flour
+Bajra Flour (₹50/KG)
 </h3>
+
+<div class="qtyLabel">
+Enter Quantity In KG
+</div>
 
 <input
 type="number"
@@ -778,6 +814,7 @@ id="bajraQty"
 class="qtyInput"
 value="0"
 min="0"
+placeholder="Enter KG"
 oninput="calculateTotal()">
 
 </div>
@@ -785,8 +822,12 @@ oninput="calculateTotal()">
 <div class="orderCard">
 
 <h3>
-Dal Flour
+Dal Flour (₹50/KG)
 </h3>
+
+<div class="qtyLabel">
+Enter Quantity In KG
+</div>
 
 <input
 type="number"
@@ -794,6 +835,7 @@ id="besanQty"
 class="qtyInput"
 value="0"
 min="0"
+placeholder="Enter KG"
 oninput="calculateTotal()">
 
 </div>
@@ -838,7 +880,7 @@ Place Order
 
 </section>
 
-<!-- BENEFITS -->
+<!-- WHY CHOOSE US -->
 
 <section
 class="section"
@@ -848,13 +890,13 @@ background:white;
 
 <h2 class="sectionTitle">
 
-Why Choose Us
+Why Choose Shadab Flour Mill
 
 </h2>
 
 <style>
 
-.benefitGrid{
+.benefitsGrid{
 
 max-width:1200px;
 
@@ -882,11 +924,11 @@ border-radius:30px;
 
 text-align:center;
 
-transition:.3s;
-
 box-shadow:
 0 8px 25px
 rgba(0,0,0,.05);
+
+transition:.3s;
 
 }
 
@@ -911,17 +953,25 @@ color:#2196F3;
 
 .benefitText{
 
-color:#666;
+font-size:15px;
 
 line-height:1.8;
 
+color:#666;
+
 }
+
+/* GUARANTEE */
 
 .guaranteeBox{
 
 max-width:1200px;
 
 margin:60px auto 0;
+
+padding:45px;
+
+border-radius:35px;
 
 background:
 linear-gradient(
@@ -930,23 +980,19 @@ linear-gradient(
 #64B5F6
 );
 
-padding:40px;
-
-border-radius:35px;
-
 color:white;
 
 text-align:center;
 
 box-shadow:
-0 15px 40px
+0 15px 35px
 rgba(33,150,243,.25);
 
 }
 
 .guaranteeBox h2{
 
-font-size:38px;
+font-size:36px;
 
 margin-bottom:20px;
 
@@ -959,6 +1005,8 @@ font-size:18px;
 line-height:2;
 
 }
+
+/* CONTACT */
 
 .contactSection{
 
@@ -1024,9 +1072,9 @@ color:white;
 
 text-decoration:none;
 
-border-radius:50px;
-
 font-weight:700;
+
+border-radius:50px;
 
 transition:.3s;
 
@@ -1038,6 +1086,8 @@ transform:
 translateY(-4px);
 
 }
+
+/* FOOTER */
 
 .footer{
 
@@ -1061,7 +1111,7 @@ margin-bottom:15px;
 
 .footer p{
 
-opacity:.8;
+opacity:.85;
 
 line-height:2;
 
@@ -1069,7 +1119,7 @@ line-height:2;
 
 </style>
 
-<div class="benefitGrid">
+<div class="benefitsGrid">
 
 <div class="benefitCard">
 
@@ -1081,7 +1131,7 @@ Fresh Daily Grinding
 
 <div class="benefitText">
 
-Fresh flour prepared daily for maximum quality and taste.
+Fresh flour prepared daily for better taste and quality.
 
 </div>
 
@@ -1097,7 +1147,7 @@ Home Delivery
 
 <div class="benefitText">
 
-Fast delivery service available across Kondhwa and nearby areas.
+Fast delivery service available across Kondhwa.
 
 </div>
 
@@ -1113,7 +1163,7 @@ Premium Quality
 
 <div class="benefitText">
 
-Selected grains with hygienic processing and packaging.
+Selected grains with clean and hygienic processing.
 
 </div>
 
@@ -1129,7 +1179,7 @@ Cash On Delivery
 
 <div class="benefitText">
 
-Easy ordering with secure cash on delivery option.
+Easy ordering with convenient cash on delivery.
 
 </div>
 
@@ -1147,15 +1197,13 @@ Quality Guarantee
 
 <p>
 
-Kondhwa mein premium quality flour.
+Kondhwa mein aisa fresh atta mushkil se milega.
 
-Fresh grinding.
+Fresh grinding, fresh delivery and trusted quality.
 
-Fresh delivery.
+Agar product quality mein issue ho,
 
-If product quality is not satisfactory,
-
-replacement support is available.
+replacement support available hai.
 
 </p>
 
@@ -1181,8 +1229,7 @@ Kondhwa, Pune
 
 <br>
 
-Mobile:
-8459925150
+Mobile : 8459925150
 
 <br>
 
@@ -1215,9 +1262,15 @@ SHADAB FLOUR MILL
 
 <p>
 
-Fresh Flour Delivered To Your Home
+Fresh Wheat Flour
 
-<br>
+Jowar Flour
+
+Bajra Flour
+
+Dal Flour
+
+<br><br>
 
 Kondhwa, Pune
 
@@ -1269,7 +1322,7 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-/* TOTAL */
+/* TOTAL CALCULATION */
 
 window.calculateTotal =
 function(){
@@ -1303,7 +1356,6 @@ document.getElementById(
 );
 
 const totalKg =
-
 wheat +
 jowar +
 bajra +
@@ -1320,6 +1372,8 @@ document.getElementById(
 totalAmount;
 
 };
+
+/* PLACE ORDER */
 
 document
 .getElementById(
@@ -1388,47 +1442,37 @@ document.getElementById(
 const items = [];
 
 if(wheat>0){
-
 items.push({
 product:"Wheat Flour",
 qty:wheat
 });
-
 }
 
 if(jowar>0){
-
 items.push({
 product:"Jowar Flour",
 qty:jowar
 });
-
 }
 
 if(bajra>0){
-
 items.push({
 product:"Bajra Flour",
 qty:bajra
 });
-
 }
 
 if(dal>0){
-
 items.push({
 product:"Dal Flour",
 qty:dal
 });
-
 }
 
-if(
-items.length==0
-){
+if(items.length==0){
 
 alert(
-"Please select products"
+"Please enter quantity"
 );
 
 return;
@@ -1436,7 +1480,6 @@ return;
 }
 
 const totalKg =
-
 wheat +
 jowar +
 bajra +
@@ -1490,6 +1533,8 @@ localStorage.setItem(
 "lastPhone",
 phone
 );
+
+/* WHATSAPP MESSAGE */
 
 let message =
 
@@ -1545,6 +1590,8 @@ orderId
 
 );
 
+/* RESET FORM */
+
 document.getElementById(
 "customerName"
 ).value="";
@@ -1574,6 +1621,8 @@ document.getElementById(
 ).value=0;
 
 calculateTotal();
+
+/* REDIRECT */
 
 setTimeout(()=>{
 
