@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width,initial-scale=1">
 
 <title>
-Shadab Flour Mill
+🌾 Shadab Flour Mill
 </title>
 
 <style>
@@ -21,84 +22,251 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#f4f4f4;
+background:#f7f4ef;
+color:#333;
 }
 
-header{
-background:#8B4513;
-color:white;
+.hero{
+
+height:350px;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+
+url(
+"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b"
+);
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
+
 padding:20px;
 }
 
-header h1{
-font-size:32px;
+.heroContent{
+
+color:white;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+margin-bottom:10px;
+
+}
+
+.heroBtns{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+.heroBtns button{
+
+padding:14px 24px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+.orderBtn{
+
+background:#8B4513;
+
+color:white;
+
+}
+
+.viewBtn{
+
+background:white;
+
+color:#8B4513;
+
 }
 
 .container{
-max-width:900px;
-margin:20px auto;
-padding:15px;
-}
 
-.card{
-background:white;
+max-width:1200px;
+
+margin:auto;
+
 padding:20px;
-margin-bottom:20px;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+
 }
 
-.card h2{
-margin-bottom:15px;
-color:#8B4513;
-}
+.sectionTitle{
 
-.product{
-padding:12px;
-border-bottom:1px solid #ddd;
-}
+font-size:28px;
 
-.product:last-child{
-border:none;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:1px solid #ccc;
-border-radius:8px;
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:15px;
-background:#8B4513;
-color:white;
-border:none;
-border-radius:8px;
-font-size:16px;
-cursor:pointer;
-}
-
-.total{
-font-size:22px;
 font-weight:bold;
-margin-top:15px;
-color:green;
+
+margin-bottom:20px;
+
+color:#8B4513;
+
 text-align:center;
+
 }
 
-.footer{
-text-align:center;
+.productsGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(160px,1fr)
+);
+
+gap:15px;
+
+}
+
+.productCard{
+
+background:white;
+
+border-radius:20px;
+
 padding:20px;
-color:#666;
+
+text-align:center;
+
+box-shadow:
+0 4px 15px
+rgba(0,0,0,.08);
+
+transition:.3s;
+
 }
 
-.qty{
-width:100%;
+.productCard:hover{
+
+transform:
+translateY(-5px);
+
+}
+
+.productIcon{
+
+font-size:50px;
+
+margin-bottom:10px;
+
+}
+
+.productName{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+}
+
+.productPrice{
+
+color:#2E7D32;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+.features{
+
+margin-top:40px;
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(180px,1fr)
+);
+
+gap:15px;
+
+}
+
+.featureCard{
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:
+0 4px 15px
+rgba(0,0,0,.08);
+
+}
+
+.featureIcon{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+}
+
+.featureTitle{
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+color:#8B4513;
+
+}
+
+.featureDesc{
+
+font-size:14px;
+
+color:#666;
+
 }
 
 </style>
@@ -107,165 +275,444 @@ width:100%;
 
 <body>
 
-<header>
+<section class="hero">
+
+<div class="heroContent">
 
 <h1>
 🌾 Shadab Flour Mill
 </h1>
 
 <p>
-Kondhwa, Pune
+Fresh Chakki Atta
+Delivered To Your Home
 </p>
 
 <p>
-Cash On Delivery Available
+100% Pure • Fresh Daily • Home Delivery
 </p>
 
-</header>
-
-<div class="container">
-
-<div class="card">
-
-<h2>
-Available Products
-</h2>
-
-<div class="product">
-
-🌾 Wheat Flour - ₹50/KG
-
-<input
-type="number"
-id="wheat"
-class="qty"
-placeholder="Wheat KG">
-
-</div>
-
-<div class="product">
-
-🌽 Jowar Flour - ₹50/KG
-
-<input
-type="number"
-id="jowar"
-class="qty"
-placeholder="Jowar KG">
-
-</div>
-
-<div class="product">
-
-🌾 Bajra Flour - ₹50/KG
-
-<input
-type="number"
-id="bajra"
-class="qty"
-placeholder="Bajra KG">
-
-</div>
-
-<div class="product">
-
-🟡 Besan - ₹50/KG
-
-<input
-type="number"
-id="besan"
-class="qty"
-placeholder="Besan KG">
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Place Order
-</h2>
-
-<input
-type="text"
-id="name"
-placeholder="Customer Name">
-
-<input
-type="tel"
-id="phone"
-placeholder="Mobile Number">
-
-<input
-type="text"
-id="address"
-placeholder="Delivery Address">
+<div class="heroBtns">
 
 <button
-onclick="calculateTotal()">
+class="orderBtn">
 
-Calculate Amount
+Order Now
 
 </button>
 
+<button
+class="viewBtn"
+onclick="
+location.href='orders.html'
+">
+
+View Orders
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<h2 class="sectionTitle">
+
+Our Products
+
+</h2>
+
+<div class="productsGrid">
+
+<div class="productCard">
+
+<div class="productIcon">
+🌾
+</div>
+
+<div class="productName">
+Wheat Flour
+</div>
+
+<div class="productPrice">
+₹50 / KG
+</div>
+
+</div>
+
+<div class="productCard">
+
+<div class="productIcon">
+🌽
+</div>
+
+<div class="productName">
+Jowar Flour
+</div>
+
+<div class="productPrice">
+₹50 / KG
+</div>
+
+</div>
+
+<div class="productCard">
+
+<div class="productIcon">
+🌾
+</div>
+
+<div class="productName">
+Bajra Flour
+</div>
+
+<div class="productPrice">
+₹50 / KG
+</div>
+
+</div>
+
+<div class="productCard">
+
+<div class="productIcon">
+🟡
+</div>
+
+<div class="productName">
+Besan
+</div>
+
+<div class="productPrice">
+₹50 / KG
+</div>
+
+</div>
+
+</div>
+
+<h2
+class="sectionTitle"
+style="margin-top:40px">
+
+Why Choose Us
+
+</h2>
+
+<div class="features">
+
+<div class="featureCard">
+
+<div class="featureIcon">
+🌾
+</div>
+
+<div class="featureTitle">
+Fresh Grinding
+</div>
+
+<div class="featureDesc">
+
+Freshly ground every day
+
+</div>
+
+</div>
+
+<div class="featureCard">
+
+<div class="featureIcon">
+🚚
+</div>
+
+<div class="featureTitle">
+Home Delivery
+</div>
+
+<div class="featureDesc">
+
+Fast delivery in Pune
+
+</div>
+
+</div>
+
+<div class="featureCard">
+
+<div class="featureIcon">
+💯
+</div>
+
+<div class="featureTitle">
+Pure Quality
+</div>
+
+<div class="featureDesc">
+
+No chemicals added
+
+</div>
+
+</div>
+
+<div class="featureCard">
+
+<div class="featureIcon">
+🕒
+</div>
+
+<div class="featureTitle">
+Quick Service
+</div>
+
+<div class="featureDesc">
+
+Same day delivery
+
+</div>
+
+</div>
+
+</div>
+
+<h2
+class="sectionTitle"
+style="margin-top:50px">
+
+🛒 Place Your Order
+
+</h2>
+
 <div
-class="total"
-id="total">
+style="
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+">
+
+<div
+style="
+display:grid;
+gap:15px;
+">
+
+<div class="productCard">
+
+<h3>
+🌾 Wheat Flour
+</h3>
+
+<input
+type="number"
+id="wheatQty"
+placeholder="KG"
+value="0"
+oninput="calculateTotal()">
+
+</div>
+
+<div class="productCard">
+
+<h3>
+🌽 Jowar Flour
+</h3>
+
+<input
+type="number"
+id="jowarQty"
+placeholder="KG"
+value="0"
+oninput="calculateTotal()">
+
+</div>
+
+<div class="productCard">
+
+<h3>
+🌾 Bajra Flour
+</h3>
+
+<input
+type="number"
+id="bajraQty"
+placeholder="KG"
+value="0"
+oninput="calculateTotal()">
+
+</div>
+
+<div class="productCard">
+
+<h3>
+🟡 Besan
+</h3>
+
+<input
+type="number"
+id="besanQty"
+placeholder="KG"
+value="0"
+oninput="calculateTotal()">
+
+</div>
+
+</div>
+
+<br>
+
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name">
+
+<br><br>
+
+<input
+type="tel"
+id="customerPhone"
+placeholder="Mobile Number">
+
+<br><br>
+
+<textarea
+id="customerAddress"
+placeholder="Delivery Address"
+style="
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:12px;
+height:100px;
+resize:none;
+"></textarea>
+
+<br><br>
+
+<div
+id="totalCard"
+style="
+background:#2E7D32;
+color:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+">
 
 Total Amount: ₹0
 
 </div>
 
 <button
-onclick="placeOrder()">
+id="placeOrderBtn"
+style="
+width:100%;
+margin-top:15px;
+padding:16px;
+background:#8B4513;
+color:white;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+">
 
-Place COD Order
-
-</button>
-
-<button
-onclick="location.href='orders.html'">
-
-📦 View My Orders
+Place Order
 
 </button>
 
 </div>
 
-<div class="card">
+<h2
+class="sectionTitle"
+style="margin-top:50px">
 
-<h2>
-Contact Us
+⭐ Customer Reviews
+
 </h2>
 
-<p>
+<div class="features">
+
+<div class="featureCard">
+
+⭐⭐⭐⭐⭐
+
+<br><br>
+
+Best quality flour.
+
+<br><br>
+
+<b>
+Ahmed
+</b>
+
+</div>
+
+<div class="featureCard">
+
+⭐⭐⭐⭐⭐
+
+<br><br>
+
+Fast delivery service.
+
+<br><br>
+
+<b>
+Sohel
+</b>
+
+</div>
+
+<div class="featureCard">
+
+⭐⭐⭐⭐⭐
+
+<br><br>
+
+Fresh chakki atta.
+
+<br><br>
+
+<b>
+Shadab
+</b>
+
+</div>
+
+</div>
+
+<footer
+style="
+margin-top:50px;
+background:#8B4513;
+color:white;
+padding:30px;
+text-align:center;
+">
+
+<h2>
+🌾 Shadab Flour Mill
+</h2>
+
+<br>
+
 📍 Kondhwa, Pune
-</p>
 
-<p>
+<br><br>
+
 📞 8459925150
-</p>
 
-<a
-href="https://wa.me/918459925150"
-target="_blank">
-
-<button>
-
-Order on WhatsApp
-
-</button>
-
-</a>
-
-</div>
-
-</div>
-
-<div class="footer">
+<br><br>
 
 © 2026 Shadab Flour Mill
+
+</footer>
 
 </div>
 
@@ -309,75 +756,104 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-window.calculateTotal = function(){
+window.calculateTotal =
+function(){
 
-let wheat =
+const wheat =
 Number(
-document.getElementById("wheat").value
-) || 0;
+document.getElementById(
+"wheatQty"
+).value || 0
+);
 
-let jowar =
+const jowar =
 Number(
-document.getElementById("jowar").value
-) || 0;
+document.getElementById(
+"jowarQty"
+).value || 0
+);
 
-let bajra =
+const bajra =
 Number(
-document.getElementById("bajra").value
-) || 0;
+document.getElementById(
+"bajraQty"
+).value || 0
+);
 
-let besan =
+const besan =
 Number(
-document.getElementById("besan").value
-) || 0;
+document.getElementById(
+"besanQty"
+).value || 0
+);
 
-let totalKg =
+const totalKg =
 wheat +
 jowar +
 bajra +
 besan;
 
-let total =
+const total =
 totalKg * 50;
 
 document.getElementById(
-"total"
+"totalCard"
 ).innerHTML =
-"Total Amount: ₹" + total;
+
+"Total Amount: ₹" +
+total;
 
 };
 
-window.placeOrder =
+document
+.getElementById(
+"placeOrderBtn"
+)
+.onclick =
 async function(){
 
-let name =
-document.getElementById("name").value;
+const name =
+document.getElementById(
+"customerName"
+).value;
 
-let phone =
-document.getElementById("phone").value;
+const phone =
+document.getElementById(
+"customerPhone"
+).value;
 
-let address =
-document.getElementById("address").value;
+const address =
+document.getElementById(
+"customerAddress"
+).value;
 
-let wheat =
+const wheat =
 Number(
-document.getElementById("wheat").value
-) || 0;
+document.getElementById(
+"wheatQty"
+).value || 0
+);
 
-let jowar =
+const jowar =
 Number(
-document.getElementById("jowar").value
-) || 0;
+document.getElementById(
+"jowarQty"
+).value || 0
+);
 
-let bajra =
+const bajra =
 Number(
-document.getElementById("bajra").value
-) || 0;
+document.getElementById(
+"bajraQty"
+).value || 0
+);
 
-let besan =
+const besan =
 Number(
-document.getElementById("besan").value
-) || 0;
+document.getElementById(
+"besanQty"
+).value || 0
+);
 
 if(
 !name ||
@@ -386,47 +862,24 @@ if(
 ){
 
 alert(
-"Please Fill All Details"
+"Please fill all details"
 );
 
 return;
 
 }
-
-if(
-wheat==0 &&
-jowar==0 &&
-bajra==0 &&
-besan==0
-){
-
-alert(
-"Add At Least One Product"
-);
-
-return;
-
-}
-
-let totalKg =
-wheat +
-jowar +
-bajra +
-besan;
-
-let total =
-totalKg * 50;
-
-const orderId =
-"ORD" + Date.now();
 
 const items = [];
 
 if(wheat>0){
 
 items.push({
-product:"Wheat Flour",
+
+product:
+"Wheat Flour",
+
 qty:wheat
+
 });
 
 }
@@ -434,8 +887,12 @@ qty:wheat
 if(jowar>0){
 
 items.push({
-product:"Jowar Flour",
+
+product:
+"Jowar Flour",
+
 qty:jowar
+
 });
 
 }
@@ -443,8 +900,12 @@ qty:jowar
 if(bajra>0){
 
 items.push({
-product:"Bajra Flour",
+
+product:
+"Bajra Flour",
+
 qty:bajra
+
 });
 
 }
@@ -452,42 +913,74 @@ qty:bajra
 if(besan>0){
 
 items.push({
-product:"Besan",
+
+product:
+"Besan",
+
 qty:besan
+
 });
 
 }
 
-try{
+if(
+items.length==0
+){
+
+alert(
+"Select at least one product"
+);
+
+return;
+
+}
+
+const totalKg =
+wheat +
+jowar +
+bajra +
+besan;
+
+const totalAmount =
+totalKg * 50;
+
+const orderId =
+"ORD" +
+Date.now();
 
 await addDoc(
-collection(db,"orders"),
+
+collection(
+db,
+"orders"
+),
+
 {
 
-orderId:orderId,
+orderId,
 
 customerName:name,
 
-phone:phone,
+phone,
 
-address:address,
+address,
 
-items:items,
+items,
 
-totalKg:totalKg,
+totalKg,
 
-totalAmount:total,
-
-paymentMethod:"COD",
+totalAmount,
 
 status:"Pending",
 
-createdAt:
-new Date().toISOString(),
+cancelled:false,
 
-cancelled:false
+createdAt:
+new Date()
+.toISOString()
 
 }
+
 );
 
 localStorage.setItem(
@@ -495,81 +988,15 @@ localStorage.setItem(
 phone
 );
 
-let msg =
-
-"🌾 Shadab Flour Mill Order%0A%0A" +
-
-"Order ID: " +
-orderId +
-"%0A" +
-
-"Customer: " +
-name +
-"%0A" +
-
-"Phone: " +
-phone +
-"%0A%0A";
-
-items.forEach((i)=>{
-
-msg +=
-i.product +
-" - " +
-i.qty +
-" KG%0A";
-
-});
-
-msg +=
-
-"%0AAddress: " +
-address +
-
-"%0A%0ATotal KG: " +
-totalKg +
-
-"%0AAmount: ₹" +
-total;
-
-window.open(
-
-"https://wa.me/918459925150?text=" +
-msg,
-
-"_blank"
-
-);
-
 alert(
 
-"Order Placed Successfully!\n\nOrder ID: " +
+"✅ Order Placed Successfully\n\nOrder ID: " +
 orderId
 
 );
 
-document.getElementById("name").value="";
-document.getElementById("phone").value="";
-document.getElementById("address").value="";
-
-document.getElementById("wheat").value="";
-document.getElementById("jowar").value="";
-document.getElementById("bajra").value="";
-document.getElementById("besan").value="";
-
-document.getElementById(
-"total"
-).innerHTML =
-"Total Amount: ₹0";
-
-}catch(e){
-
-alert(
-"Error: " +
-e.message
-);
-
-}
+location.href =
+"orders.html";
 
 };
 
