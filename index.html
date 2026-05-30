@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shadab Flour Mill</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+Shadab Flour Mill
+</title>
 
 <style>
 
@@ -49,7 +55,7 @@ color:#8B4513;
 }
 
 .product{
-padding:10px;
+padding:12px;
 border-bottom:1px solid #ddd;
 }
 
@@ -57,8 +63,7 @@ border-bottom:1px solid #ddd;
 border:none;
 }
 
-input,
-select{
+input{
 width:100%;
 padding:12px;
 margin-top:10px;
@@ -78,10 +83,6 @@ font-size:16px;
 cursor:pointer;
 }
 
-button:hover{
-opacity:.9;
-}
-
 .total{
 font-size:22px;
 font-weight:bold;
@@ -90,32 +91,35 @@ color:green;
 text-align:center;
 }
 
-.status-box{
-margin-top:15px;
-padding:15px;
-background:#fafafa;
-border-radius:10px;
-border-left:5px solid #8B4513;
-}
-
 .footer{
 text-align:center;
 padding:20px;
 color:#666;
 }
 
+.qty{
+width:100%;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<h1>🌾 Shadab Flour Mill</h1>
+<h1>
+🌾 Shadab Flour Mill
+</h1>
 
-<p>Kondhwa, Pune</p>
+<p>
+Kondhwa, Pune
+</p>
 
-<p>Cash On Delivery Available</p>
+<p>
+Cash On Delivery Available
+</p>
 
 </header>
 
@@ -123,46 +127,65 @@ color:#666;
 
 <div class="card">
 
-<h2>Available Products</h2>
+<h2>
+Available Products
+</h2>
 
 <div class="product">
+
 🌾 Wheat Flour - ₹50/KG
+
+<input
+type="number"
+id="wheat"
+class="qty"
+placeholder="Wheat KG">
+
 </div>
 
 <div class="product">
+
 🌽 Jowar Flour - ₹50/KG
+
+<input
+type="number"
+id="jowar"
+class="qty"
+placeholder="Jowar KG">
+
 </div>
 
 <div class="product">
+
 🌾 Bajra Flour - ₹50/KG
+
+<input
+type="number"
+id="bajra"
+class="qty"
+placeholder="Bajra KG">
+
 </div>
 
 <div class="product">
+
 🟡 Besan - ₹50/KG
+
+<input
+type="number"
+id="besan"
+class="qty"
+placeholder="Besan KG">
+
 </div>
 
 </div>
 
 <div class="card">
 
-<h2>Place Order</h2>
-
-<select id="product">
-
-<option>Wheat Flour</option>
-
-<option>Jowar Flour</option>
-
-<option>Bajra Flour</option>
-
-<option>Besan</option>
-
-</select>
-
-<input
-type="number"
-id="kg"
-placeholder="Quantity in KG">
+<h2>
+Place Order
+</h2>
 
 <input
 type="text"
@@ -179,8 +202,11 @@ type="text"
 id="address"
 placeholder="Delivery Address">
 
-<button onclick="calculateTotal()">
+<button
+onclick="calculateTotal()">
+
 Calculate Amount
+
 </button>
 
 <div
@@ -191,59 +217,44 @@ Total Amount: ₹0
 
 </div>
 
-<button onclick="placeOrder()">
+<button
+onclick="placeOrder()">
+
 Place COD Order
+
+</button>
+
+<button
+onclick="location.href='orders.html'">
+
+📦 View My Orders
+
 </button>
 
 </div>
 
 <div class="card">
 
-<h2>📦 My Order Status</h2>
+<h2>
+Contact Us
+</h2>
 
-<input
-type="tel"
-id="trackPhone"
-placeholder="Enter Mobile Number">
+<p>
+📍 Kondhwa, Pune
+</p>
 
-<button onclick="checkStatus()">
-Check Order Status
-</button>
-
-<div
-id="statusResult"
-class="status-box">
-
-No Order Checked Yet
-
-</div>
-
-<h3 style="margin-top:20px">
-📦 My Orders Dashboard
-</h3>
-
-<div id="orderStats" class="status-box">
-No Orders
-</div>
-
-<div id="allOrders"></div>
-
-</div>
-
-<div class="card">
-
-<h2>Contact Us</h2>
-
-<p>📍 Kondhwa, Pune</p>
-
-<p>📞 8459925150</p>
+<p>
+📞 8459925150
+</p>
 
 <a
 href="https://wa.me/918459925150"
 target="_blank">
 
 <button>
+
 Order on WhatsApp
+
 </button>
 
 </a>
@@ -260,48 +271,84 @@ Order on WhatsApp
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getFirestore,
 collection,
-addDoc,
-getDocs
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
-authDomain: "planning-with-ai-90e6a.firebaseapp.com",
-projectId: "planning-with-ai-90e6a",
-storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
-messagingSenderId: "835817978059",
-appId: "1:835817978059:web:441596d86a28628c3fc34e"
+
+apiKey:
+"AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+
+authDomain:
+"planning-with-ai-90e6a.firebaseapp.com",
+
+projectId:
+"planning-with-ai-90e6a",
+
+storageBucket:
+"planning-with-ai-90e6a.firebasestorage.app",
+
+messagingSenderId:
+"835817978059",
+
+appId:
+"1:835817978059:web:441596d86a28628c3fc34e"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
 
 window.calculateTotal = function(){
 
-let kg =
-parseFloat(
-document.getElementById("kg").value
+let wheat =
+Number(
+document.getElementById("wheat").value
 ) || 0;
 
-let total = kg * 50;
+let jowar =
+Number(
+document.getElementById("jowar").value
+) || 0;
 
-document.getElementById("total").innerHTML =
+let bajra =
+Number(
+document.getElementById("bajra").value
+) || 0;
+
+let besan =
+Number(
+document.getElementById("besan").value
+) || 0;
+
+let totalKg =
+wheat +
+jowar +
+bajra +
+besan;
+
+let total =
+totalKg * 50;
+
+document.getElementById(
+"total"
+).innerHTML =
 "Total Amount: ₹" + total;
 
 };
 
-window.placeOrder = async function(){
-
-let product =
-document.getElementById("product").value;
-
-let kg =
-document.getElementById("kg").value;
+window.placeOrder =
+async function(){
 
 let name =
 document.getElementById("name").value;
@@ -312,37 +359,132 @@ document.getElementById("phone").value;
 let address =
 document.getElementById("address").value;
 
+let wheat =
+Number(
+document.getElementById("wheat").value
+) || 0;
+
+let jowar =
+Number(
+document.getElementById("jowar").value
+) || 0;
+
+let bajra =
+Number(
+document.getElementById("bajra").value
+) || 0;
+
+let besan =
+Number(
+document.getElementById("besan").value
+) || 0;
+
 if(
 !name ||
 !phone ||
-!address ||
-!kg
+!address
 ){
-alert("Please fill all details");
+
+alert(
+"Please Fill All Details"
+);
+
 return;
+
 }
 
+if(
+wheat==0 &&
+jowar==0 &&
+bajra==0 &&
+besan==0
+){
+
+alert(
+"Add At Least One Product"
+);
+
+return;
+
+}
+
+let totalKg =
+wheat +
+jowar +
+bajra +
+besan;
+
 let total =
-Number(kg) * 50;
+totalKg * 50;
 
 const orderId =
 "ORD" + Date.now();
+
+const items = [];
+
+if(wheat>0){
+
+items.push({
+product:"Wheat Flour",
+qty:wheat
+});
+
+}
+
+if(jowar>0){
+
+items.push({
+product:"Jowar Flour",
+qty:jowar
+});
+
+}
+
+if(bajra>0){
+
+items.push({
+product:"Bajra Flour",
+qty:bajra
+});
+
+}
+
+if(besan>0){
+
+items.push({
+product:"Besan",
+qty:besan
+});
+
+}
 
 try{
 
 await addDoc(
 collection(db,"orders"),
 {
+
 orderId:orderId,
+
 customerName:name,
+
 phone:phone,
+
 address:address,
-product:product,
-quantityKg:Number(kg),
+
+items:items,
+
+totalKg:totalKg,
+
 totalAmount:total,
+
 paymentMethod:"COD",
+
 status:"Pending",
-createdAt:new Date().toISOString()
+
+createdAt:
+new Date().toISOString()
+
 }
 );
 
@@ -351,300 +493,80 @@ localStorage.setItem(
 phone
 );
 
-let message =
+let msg =
+
 "🌾 Shadab Flour Mill Order%0A%0A" +
-"Order ID: " + orderId + "%0A" +
-"Name: " + name + "%0A" +
-"Phone: " + phone + "%0A" +
-"Product: " + product + "%0A" +
-"Quantity: " + kg + " KG%0A" +
-"Address: " + address + "%0A" +
-"Total: ₹" + total + "%0A" +
-"Payment: Cash On Delivery";
+
+"Order ID: " +
+orderId +
+"%0A" +
+
+"Customer: " +
+name +
+"%0A" +
+
+"Phone: " +
+phone +
+"%0A%0A";
+
+items.forEach((i)=>{
+
+msg +=
+i.product +
+" - " +
+i.qty +
+" KG%0A";
+
+});
+
+msg +=
+
+"%0AAddress: " +
+address +
+
+"%0A%0ATotal KG: " +
+totalKg +
+
+"%0AAmount: ₹" +
+total;
 
 window.open(
+
 "https://wa.me/918459925150?text=" +
-message,
+msg,
+
 "_blank"
+
 );
 
 alert(
-"Order Saved Successfully!\n\nOrder ID: " +
+
+"Order Placed Successfully!\n\nOrder ID: " +
 orderId
+
 );
 
-document.getElementById("trackPhone").value =
-phone;
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("address").value="";
 
-checkStatus();
+document.getElementById("wheat").value="";
+document.getElementById("jowar").value="";
+document.getElementById("bajra").value="";
+document.getElementById("besan").value="";
+
+document.getElementById(
+"total"
+).innerHTML =
+"Total Amount: ₹0";
 
 }catch(e){
 
-console.error(e);
-
 alert(
-"Firebase Error: " +
+"Error: " +
 e.message
 );
 
-}
-
-};
-
-window.checkStatus =
-async function(){
-
-const phone =
-document.getElementById("trackPhone").value;
-
-if(!phone){
-
-document.getElementById(
-"statusResult"
-).innerHTML =
-"Enter Mobile Number";
-
-return;
-
-}
-
-const snap =
-await getDocs(
-collection(db,"orders")
-);
-
-let latestOrder = null;
-
-snap.forEach((d)=>{
-
-const data =
-d.data();
-
-if(data.phone == phone){
-
-latestOrder = data;
-
-}
-
-});
-
-if(!latestOrder){
-
-document.getElementById(
-"statusResult"
-).innerHTML =
-"No Orders Found";
-
-return;
-
-}
-
-let emoji = "🟡";
-
-if(
-latestOrder.status ==
-"Confirmed"
-){
-emoji = "🟢";
-}
-
-if(
-latestOrder.status ==
-"Out For Delivery"
-){
-emoji = "🔵";
-}
-
-if(
-latestOrder.status ==
-"Delivered"
-){
-emoji = "✅";
-}
-
-document.getElementById(
-"statusResult"
-).innerHTML =
-
-`
-<h3>
-${latestOrder.customerName}
-</h3>
-
-<p>
-Order ID:
-${latestOrder.orderId}
-</p>
-
-<p>
-Product:
-${latestOrder.product}
-</p>
-
-<p>
-Quantity:
-${latestOrder.quantityKg} KG
-</p>
-
-<p>
-Total:
-₹${latestOrder.totalAmount}
-</p>
-
-<h2>
-${emoji}
-${latestOrder.status}
-</h2>
-`;
-loadCustomerOrders(phone);
-};
-async function loadCustomerOrders(phone){
-
-const snap =
-await getDocs(
-collection(db,"orders")
-);
-
-let total=0;
-let pending=0;
-let confirmed=0;
-let delivery=0;
-let delivered=0;
-
-let html="";
-
-snap.forEach((d)=>{
-
-const order=d.data();
-
-if(order.phone!=phone)
-return;
-
-if(
-order.status=="Delivered" &&
-order.deliveredAt
-){
-
-const mins=
-(
-new Date() -
-new Date(order.deliveredAt)
-)
-/
-1000
-/
-60;
-
-if(mins>30)
-return;
-
-}
-
-total++;
-
-if(order.status=="Pending")
-pending++;
-
-if(order.status=="Confirmed")
-confirmed++;
-
-if(order.status=="Out For Delivery")
-delivery++;
-
-if(order.status=="Delivered")
-delivered++;
-
-let emoji="🟡";
-
-if(order.status=="Confirmed")
-emoji="🟢";
-
-if(order.status=="Out For Delivery")
-emoji="🔵";
-
-if(order.status=="Delivered")
-emoji="✅";
-
-html += `
-<div class="card">
-
-<h3>
-${emoji}
-${order.product}
-</h3>
-
-<p>
-Quantity:
-${order.quantityKg} KG
-</p>
-
-<p>
-Total:
-₹${order.totalAmount}
-</p>
-
-<p>
-Status:
-${order.status}
-</p>
-
-</div>
-`;
-
-});
-
-document.getElementById(
-"orderStats"
-).innerHTML=
-
-`
-📦 Total Orders:
-${total}
-<br><br>
-
-🟡 Pending:
-${pending}
-<br>
-
-🟢 Confirmed:
-${confirmed}
-<br>
-
-🔵 Out For Delivery:
-${delivery}
-<br>
-
-✅ Delivered:
-${delivered}
-`;
-
-document.getElementById(
-"allOrders"
-).innerHTML=html;
-
-}
-
-window.onload = function(){
-
-const savedPhone =
-localStorage.getItem(
-"lastPhone"
-);
-
-if(savedPhone){
-
-document.getElementById(
-"trackPhone"
-).value =
-savedPhone;
-
-checkStatus();
-setInterval(
-()=>{
-checkStatus();
-},
-30000
-);
 }
 
 };
