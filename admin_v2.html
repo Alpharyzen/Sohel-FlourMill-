@@ -463,6 +463,42 @@ orders.forEach((data)=>{
 const status =
 data.status ||
 "Pending";
+if(status=="Cancelled"){
+
+ordersDiv.innerHTML += `
+
+<div class="order">
+
+<h3>
+❌ ${data.customerName}
+</h3>
+
+<p>
+<b>Phone:</b>
+${data.phone}
+</p>
+
+<p>
+<b>Address:</b>
+${data.address}
+</p>
+
+<p style="
+color:red;
+font-weight:bold;
+">
+
+❌ Order Cancelled
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
 
 if(
 status=="Delivered"
