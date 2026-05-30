@@ -70,6 +70,15 @@ onclick="location.href='admin_v2.html'">
 </h1>
 
 </div>
+<div
+id="dateButtons"
+style="
+display:flex;
+gap:10px;
+overflow:auto;
+margin-bottom:20px;
+">
+</div>
 
 <div id="history">
 
@@ -171,6 +180,25 @@ groups[date].orders.push(data);
 
 let html = "";
 
+let dateBtns = "";
+
+const last7Days = [];
+
+for(let i=0;i<7;i++){
+
+const d =
+new Date();
+
+d.setDate(
+d.getDate()-i
+);
+
+last7Days.push(
+d.toLocaleDateString()
+);
+
+}
+
 Object.keys(groups)
 .reverse()
 .forEach((date)=>{
@@ -180,7 +208,10 @@ groups[date];
 
 html += `
 
-<div class="card">
+<div
+class="card historyCard"
+data-date="${date}"
+style="display:none">
 
 <h2>
 📅 ${date}
@@ -237,6 +268,31 @@ html += `
 `;
 
 });
+last7Days.forEach((date)=>{
+
+dateBtns += `
+
+<button
+onclick="
+showDateHistory(
+'${date}'
+)
+">
+
+${date}
+
+</button>
+
+`;
+
+});
+
+document
+.getElementById(
+"dateButtons"
+)
+.innerHTML =
+dateBtns;
 
 document
 .getElementById("history")
@@ -247,8 +303,55 @@ html ||
 "<div class='card'>No Delivery History Found</div>";
 
 }
+window.showDateHistory =
+function(date){
+
+const snapDiv =
+document.getElementById(
+"history"
+);
+
+const cards =
+document.querySelectorAll(
+".historyCard"
+);
+
+cards.forEach((c)=>{
+
+if(
+c.dataset.date==date
+){
+
+c.style.display=
+"block";
+
+}else{
+
+c.style.display=
+"none";
+
+}
+
+});
+
+};
 
 loadHistory();
+setTimeout(()=>{
+
+const firstBtn =
+document.querySelector(
+".historyCard"
+);
+
+if(firstBtn){
+
+firstBtn.style.display=
+"block";
+
+}
+
+},500);
 
 </script>
 
