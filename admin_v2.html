@@ -83,6 +83,42 @@ margin-top:15px;
 border-radius:10px;
 border-left:5px solid #8B4513;
 }
+.topBar{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.menuBtn{
+background:#8B4513;
+color:white;
+font-size:22px;
+}
+
+.sideMenu{
+position:fixed;
+top:0;
+left:-260px;
+width:250px;
+height:100%;
+background:white;
+box-shadow:0 0 10px rgba(0,0,0,.3);
+padding-top:60px;
+transition:.3s;
+z-index:999;
+}
+
+.sideMenu a{
+display:block;
+padding:15px 20px;
+text-decoration:none;
+color:black;
+font-size:18px;
+}
+
+.sideMenu.show{
+left:0;
+}
 
 </style>
 
@@ -117,9 +153,38 @@ Login
 id="adminPanel"
 style="display:none">
 
+<div
+id="sideMenu"
+class="sideMenu">
+
+<a href="admin_v2.html">
+📦 Orders
+</a>
+
+<a href="history.html">
+📜 Delivery History
+</a>
+
+<a href="#"
+onclick="logout()">
+🚪 Logout
+</a>
+
+</div>
+
+<div class="topBar">
+
+<button
+class="menuBtn"
+onclick="openMenu()">
+☰
+</button>
+
 <h1>
 🌾 Shadab Flour Mill Orders
 </h1>
+
+</div>
 
 <button
 class="stopBtn"
@@ -454,8 +519,19 @@ loadOrders();
 
 };
 
-window.logout =
+window.openMenu =
 function(){
+
+document
+.getElementById(
+"sideMenu"
+)
+.classList
+.toggle(
+"show"
+);
+
+};
 
 localStorage.removeItem(
 "adminLoggedIn"
