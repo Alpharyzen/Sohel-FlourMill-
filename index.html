@@ -109,19 +109,21 @@ letter-spacing:1px;
 
 }
 
-/* MAIN */
+/* HERO */
 
 .hero{
 
 position:relative;
 
-min-height:1700px;
+min-height:2200px;
 
 background:#000;
 
+overflow:hidden;
+
 }
 
-/* TEXT */
+/* LEFT TEXT */
 
 .topText{
 
@@ -412,23 +414,23 @@ position:absolute;
 
 top:1120px;
 
-left:210px;
+left:180px;
 
 }
 
 .orderBtn{
 
-display:inline-flex;
+display:flex;
 
 align-items:center;
 
 justify-content:center;
 
-width:220px;
+width:240px;
 
 height:95px;
 
-border:3px solid white;
+border:3px solid #fff;
 
 border-radius:60px;
 
@@ -436,7 +438,7 @@ color:white;
 
 text-decoration:none;
 
-font-size:24px;
+font-size:22px;
 
 font-weight:700;
 
@@ -452,11 +454,10 @@ background:white;
 
 color:black;
 
-transform:
-scale(1.05);
+transform:scale(1.05);
 
 box-shadow:
-0 0 30px
+0 0 35px
 rgba(255,255,255,.35);
 
 }
@@ -475,84 +476,84 @@ ORDER NOW
 
 </div>
 
-<!-- DESCRIPTION -->
+</section>
 
-<div
+<!-- SUMMARY -->
+
+<section
 style="
-position:absolute;
-bottom:250px;
-left:50%;
-transform:translateX(-50%);
-width:90%;
-max-width:1200px;
+background:#000;
+padding:80px 25px;
 text-align:center;
+color:white;
+">
+
+<p
+style="
+max-width:1100px;
+margin:auto;
 font-size:14px;
-line-height:2;
+line-height:2.2;
 letter-spacing:1px;
-color:#e5e5e5;
 ">
 
 AT OUR FLOUR MILL, WE ARE COMMITTED TO PROVIDING CLEAN,
-FRESH, AND HYGIENICALLY PROCESSED PRODUCTS.
+FRESH AND HYGIENICALLY PROCESSED PRODUCTS.
 
-EVERY BATCH OF WHEAT FLOUR, JAWARI FLOUR,
-BAJRA FLOUR AND BESAN IS CAREFULLY SELECTED,
-TESTED, AND PACKED TO MAINTAIN THE HIGHEST QUALITY STANDARDS.
+EVERY BATCH OF WHEAT FLOUR,
+JAWARI FLOUR,
+BAJRA FLOUR AND BESAN IS CAREFULLY
+SELECTED, TESTED AND PACKED TO MAINTAIN
+THE HIGHEST QUALITY STANDARDS.
 
-CUSTOMER SATISFACTION IS OUR PRIORITY,
-AND IF YOU RECEIVE A DAMAGED OR DEFECTIVE PRODUCT,
-WE OFFER REPLACEMENT SUPPORT.
+CUSTOMER SATISFACTION IS OUR PRIORITY.
+
+IF A PRODUCT ARRIVES DAMAGED OR DOES NOT
+MEET EXPECTATIONS, WE PROVIDE REPLACEMENT SUPPORT.
 
 WE BELIEVE IN DELIVERING PURITY,
-FRESHNESS, AND TRUST WITH EVERY ORDER.
+FRESHNESS AND TRUST WITH EVERY ORDER.
 
-</div>
+</p>
 
-<!-- WHATSAPP FOOTER -->
+</section>
 
-<div
+<!-- WHATSAPP -->
+
+<section
 style="
-position:absolute;
-bottom:120px;
-left:50%;
-transform:translateX(-50%);
+background:#000;
+padding:20px 25px 100px;
 text-align:center;
+color:white;
 ">
 
-<a
-href="https://wa.me/918459925150"
+<h2
 style="
-color:white;
-text-decoration:none;
-font-size:18px;
+font-size:28px;
 font-weight:700;
-letter-spacing:2px;
+letter-spacing:3px;
+margin-bottom:20px;
 ">
 
 WHATSAPP
 
-</a>
+</h2>
 
-<br><br>
-
-<div
+<h1
 style="
-font-size:22px;
+font-size:42px;
 font-weight:800;
-letter-spacing:2px;
+letter-spacing:4px;
 ">
 
 8459925150
 
-</div>
-
-</div>
+</h1>
 
 </section>
 
 <style>
-
-/* MOBILE */
 
 @media(max-width:900px){
 
@@ -565,13 +566,9 @@ min-height:2200px;
 .topText{
 
 left:50%;
-
 transform:translateX(-50%);
-
 width:90%;
-
 top:170px;
-
 font-size:17px;
 
 }
@@ -579,13 +576,9 @@ font-size:17px;
 .middleText{
 
 left:50%;
-
 transform:translateX(-50%);
-
 width:90%;
-
 top:1080px;
-
 font-size:17px;
 
 }
@@ -593,11 +586,8 @@ font-size:17px;
 .wheat{
 
 top:420px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 right:auto;
 
 }
@@ -605,11 +595,8 @@ right:auto;
 .bajra{
 
 top:820px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 right:auto;
 
 }
@@ -617,11 +604,8 @@ right:auto;
 .besan{
 
 top:1280px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 right:auto;
 
 }
@@ -629,11 +613,8 @@ right:auto;
 .jawari{
 
 top:1680px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 right:auto;
 
 }
@@ -641,34 +622,8 @@ right:auto;
 .orderWrap{
 
 left:50%;
-
 transform:translateX(-50%);
-
 top:1980px;
-
-}
-
-.header{
-
-padding:0 15px;
-
-}
-
-.logo{
-
-font-size:15px;
-
-}
-
-.nav{
-
-gap:12px;
-
-}
-
-.nav a{
-
-font-size:11px;
 
 }
 
@@ -679,9 +634,7 @@ font-size:11px;
 .orderBtn{
 
 width:190px;
-
 height:85px;
-
 font-size:20px;
 
 }
@@ -701,9 +654,9 @@ font-size:15px;
 <footer
 style="
 background:#000;
+border-top:1px solid rgba(255,255,255,.08);
 padding:60px 20px;
 text-align:center;
-border-top:1px solid rgba(255,255,255,.1);
 ">
 
 <h2
@@ -723,15 +676,25 @@ style="
 color:#bdbdbd;
 font-size:14px;
 line-height:2;
-max-width:800px;
+max-width:700px;
 margin:auto;
 ">
 
-Premium Quality Wheat Flour,
-Jawari Flour, Bajra Flour and Besan.
+PREMIUM QUALITY
 
-Freshly Processed • Hygienically Packed •
-Home Delivery Available In Kondhwa
+WHEAT FLOUR
+
+JAWARI FLOUR
+
+BAJRA FLOUR
+
+BESAN
+
+<br><br>
+
+HOME DELIVERY AVAILABLE
+
+KONDHWA • PUNE
 
 </p>
 
@@ -739,8 +702,8 @@ Home Delivery Available In Kondhwa
 
 <div
 style="
+color:#666;
 font-size:13px;
-color:#777;
 letter-spacing:1px;
 ">
 
