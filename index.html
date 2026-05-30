@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -7,43 +7,33 @@
 
 <meta
 name="viewport"
-content="width=device-width,initial-scale=1">
+content="width=device-width, initial-scale=1.0">
 
 <title>
-
 SHADAB FLOUR MILL
-
 </title>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet">
 
 <style>
 
 *{
-
 margin:0;
 padding:0;
 box-sizing:border-box;
-
 }
 
 html{
-
 scroll-behavior:smooth;
-
 }
 
 body{
 
 background:#000;
 color:#fff;
-
-font-family:
-'Montserrat',
-sans-serif;
-
+font-family:'Montserrat',sans-serif;
 overflow-x:hidden;
 
 }
@@ -59,34 +49,29 @@ linear-gradient(
 rgba(0,0,0,.45),
 rgba(0,0,0,.45)
 ),
+
 url("images/header-wheat.jpg");
 
 background-size:cover;
 background-position:center;
 
 display:flex;
-
+align-items:center;
 justify-content:space-between;
 
-align-items:center;
-
-padding:0 40px;
+padding:0 80px;
 
 }
 
 .logo{
 
-font-family:
-'Cinzel',
-serif;
+font-family:'Cinzel',serif;
 
-font-size:30px;
-
+font-size:28px;
 font-weight:700;
 
 letter-spacing:3px;
-
-line-height:1.1;
+line-height:1.15;
 
 color:white;
 
@@ -95,23 +80,19 @@ color:white;
 .nav{
 
 display:flex;
-
-gap:40px;
+gap:45px;
 
 }
 
 .nav a{
 
 color:white;
-
 text-decoration:none;
 
 font-size:15px;
-
 font-weight:600;
 
 letter-spacing:2px;
-
 text-transform:uppercase;
 
 transition:.3s;
@@ -128,94 +109,97 @@ opacity:.7;
 
 .hero{
 
-padding-top:70px;
-
-padding-bottom:80px;
+position:relative;
 
 background:#000;
 
+min-height:1500px;
+
+overflow:hidden;
+
 }
 
-/* TITLE */
+/* LEFT TEXT */
 
-.heroTitle{
+.topText{
 
-text-align:center;
+position:absolute;
 
-max-width:900px;
+top:160px;
+left:80px;
 
-margin:auto;
+width:520px;
 
 font-size:22px;
+font-weight:700;
 
-font-weight:600;
-
-line-height:1.8;
+line-height:1.7;
 
 letter-spacing:2px;
+
+text-align:center;
 
 text-transform:uppercase;
 
 }
 
-/* PRODUCT ROW */
+.middleText{
 
-.productsRow{
+position:absolute;
 
-margin-top:90px;
+top:650px;
+left:60px;
 
-display:flex;
+width:560px;
 
-justify-content:center;
+font-size:22px;
+font-weight:700;
 
-gap:35px;
+line-height:1.7;
 
-flex-wrap:wrap;
+letter-spacing:2px;
+
+text-align:center;
+
+text-transform:uppercase;
 
 }
 
-.productCard{
+/* PRODUCT PILLS */
 
-width:170px;
+.pill{
 
-height:390px;
-
-border-radius:90px;
+position:absolute;
 
 overflow:hidden;
 
-position:relative;
-
-box-shadow:
-0 0 25px
-rgba(255,255,255,.08);
+border-radius:80px;
 
 transition:.4s;
 
 }
 
-.productCard:hover{
+.pill:hover{
 
 transform:
-translateY(-10px);
+translateY(-12px);
 
 }
 
-.productCard img{
+.pill img{
 
 width:100%;
-
 height:100%;
 
 object-fit:cover;
 
 }
 
-.productName{
+.label{
 
 position:absolute;
 
-bottom:25px;
+bottom:18px;
 
 left:50%;
 
@@ -235,15 +219,141 @@ text-shadow:
 
 }
 
-/* MOBILE */
+/* WHEAT */
+
+.wheat{
+
+width:150px;
+height:350px;
+
+top:180px;
+right:260px;
+
+}
+
+/* BAJRA */
+
+.bajra{
+
+width:150px;
+height:380px;
+
+top:380px;
+right:60px;
+
+}
+
+/* BESAN */
+
+.besan{
+
+width:150px;
+height:320px;
+
+top:760px;
+right:250px;
+
+}
+
+/* JAWARI */
+
+.jawari{
+
+width:150px;
+height:420px;
+
+top:1020px;
+right:60px;
+
+}
+
+/* ORDER BUTTON */
+
+.orderWrap{
+
+position:absolute;
+
+top:820px;
+left:220px;
+
+}
+
+.orderBtn{
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+width:240px;
+height:95px;
+
+border:3px solid white;
+
+border-radius:60px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:24px;
+font-weight:700;
+
+letter-spacing:2px;
+
+transition:.35s;
+
+}
+
+.orderBtn:hover{
+
+background:white;
+
+color:black;
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 30px
+rgba(255,255,255,.25);
+
+}
+
+/* MOBILE VERSION */
+
+.mobileHero{
+
+display:none;
+
+}
 
 @media(max-width:900px){
 
+.hero{
+
+display:none;
+
+}
+
+.mobileHero{
+
+display:block;
+
+position:relative;
+
+background:#000;
+
+min-height:1750px;
+
+overflow:hidden;
+
+}
+
 .header{
 
-padding:0 15px;
+padding:0 18px;
 
-height:110px;
+height:105px;
 
 }
 
@@ -267,38 +377,6 @@ font-size:11px;
 
 }
 
-.heroTitle{
-
-font-size:16px;
-
-width:90%;
-
-}
-
-.productsRow{
-
-gap:12px;
-
-padding:0 10px;
-
-}
-
-.productCard{
-
-width:105px;
-
-height:230px;
-
-border-radius:60px;
-
-}
-
-.productName{
-
-font-size:14px;
-
-}
-
 }
 
 </style>
@@ -318,7 +396,7 @@ FLOURMILL
 
 <div class="nav">
 
-<a href="#products">
+<a href="#">
 
 Product
 
@@ -340,9 +418,11 @@ WhatsApp
 
 </header>
 
+<!-- DESKTOP HERO -->
+
 <section class="hero">
 
-<div class="heroTitle">
+<div class="topText">
 
 DELIVERING PREMIUM QUALITY WHEAT
 AND FLOUR WITH A COMMITMENT TO
@@ -350,18 +430,19 @@ EXCELLENCE
 
 </div>
 
-<div
-class="productsRow"
-id="products">
+<div class="middleText">
 
-<!-- WHEAT -->
+HYGIENICALLY PROCESSED TO
+ENSURE FRESHNESS, PURITY
+AND CONSISTENCY
 
-<div class="productCard">
+</div>
 
-<img
-src="images/wheat.jpg">
+<div class="pill wheat">
 
-<div class="productName">
+<img src="images/wheat.jpg">
+
+<div class="label">
 
 WHEAT
 
@@ -369,29 +450,11 @@ WHEAT
 
 </div>
 
-<!-- JAWARI -->
+<div class="pill bajra">
 
-<div class="productCard">
+<img src="images/bajra.jpg">
 
-<img
-src="images/jawari.jpg">
-
-<div class="productName">
-
-JAWARI
-
-</div>
-
-</div>
-
-<!-- BAJRA -->
-
-<div class="productCard">
-
-<img
-src="images/bajra.jpg">
-
-<div class="productName">
+<div class="label">
 
 BAJRA
 
@@ -399,14 +462,11 @@ BAJRA
 
 </div>
 
-<!-- BESAN -->
+<div class="pill besan">
 
-<div class="productCard">
+<img src="images/besan.jpg">
 
-<img
-src="images/besan.jpg">
-
-<div class="productName">
+<div class="label">
 
 BESAN
 
@@ -414,105 +474,19 @@ BESAN
 
 </div>
 
-</div>
+<div class="pill jawari">
 
-<!-- DESCRIPTION -->
+<img src="images/jawari.jpg">
 
-<div
-class="heroTitle"
-style="
-margin-top:80px;
-max-width:900px;
-font-size:18px;
-">
+<div class="label">
 
-HYGIENICALLY PROCESSED TO ENSURE
-FRESHNESS, PURITY AND CONSISTENCY.
-
-MADE FROM CAREFULLY SELECTED
-PREMIUM QUALITY GRAINS.
+JAWARI
 
 </div>
 
-<style>
+</div>
 
-.orderSection{
-
-margin-top:80px;
-
-display:flex;
-
-justify-content:center;
-
-}
-
-.orderBtn{
-
-width:260px;
-
-height:95px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-border:3px solid white;
-
-border-radius:70px;
-
-color:white;
-
-text-decoration:none;
-
-font-size:24px;
-
-font-weight:700;
-
-letter-spacing:2px;
-
-transition:.35s;
-
-}
-
-.orderBtn:hover{
-
-background:white;
-
-color:black;
-
-transform:scale(1.05);
-
-box-shadow:
-0 0 35px
-rgba(255,255,255,.35);
-
-}
-
-@media(max-width:900px){
-
-.orderSection{
-
-margin-top:50px;
-
-}
-
-.orderBtn{
-
-width:190px;
-
-height:80px;
-
-font-size:18px;
-
-}
-
-}
-
-</style>
-
-<div class="orderSection">
+<div class="orderWrap">
 
 <a
 href="order.html"
@@ -524,21 +498,294 @@ ORDER NOW
 
 </div>
 
+</section>
+
+<!-- MOBILE HERO -->
+
+<section class="mobileHero">
+
+<!-- TOP TEXT -->
+
+<div
+style="
+position:absolute;
+top:170px;
+left:20px;
+width:290px;
+
+font-size:18px;
+font-weight:700;
+
+line-height:1.6;
+
+letter-spacing:1px;
+
+text-align:center;
+
+text-transform:uppercase;
+">
+
+DELIVERING PREMIUM QUALITY
+WHEAT AND FLOUR WITH A
+COMMITMENT TO EXCELLENCE
+
+</div>
+
+<!-- WHEAT -->
+
+<div
+style="
+position:absolute;
+
+top:200px;
+right:120px;
+
+width:120px;
+height:280px;
+
+overflow:hidden;
+
+border-radius:70px;
+">
+
+<img
+src="images/wheat.jpg"
+
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+">
+
+<div
+style="
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+font-weight:700;
+">
+
+WHEAT
+
+</div>
+
+</div>
+
+<!-- BAJRA -->
+
+<div
+style="
+position:absolute;
+
+top:420px;
+right:20px;
+
+width:120px;
+height:320px;
+
+overflow:hidden;
+
+border-radius:70px;
+">
+
+<img
+src="images/bajra.jpg"
+
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+">
+
+<div
+style="
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+font-weight:700;
+">
+
+BAJRA
+
+</div>
+
+</div>
+
+<!-- MIDDLE TEXT -->
+
+<div
+style="
+position:absolute;
+
+top:700px;
+left:10px;
+
+width:300px;
+
+font-size:18px;
+font-weight:700;
+
+line-height:1.6;
+
+letter-spacing:1px;
+
+text-align:center;
+
+text-transform:uppercase;
+">
+
+HYGIENICALLY PROCESSED TO
+ENSURE FRESHNESS, PURITY
+AND CONSISTENCY
+
+</div>
+
+<!-- BESAN -->
+
+<div
+style="
+position:absolute;
+
+top:760px;
+right:120px;
+
+width:120px;
+height:280px;
+
+overflow:hidden;
+
+border-radius:70px;
+">
+
+<img
+src="images/besan.jpg"
+
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+">
+
+<div
+style="
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+font-weight:700;
+">
+
+BESAN
+
+</div>
+
+</div>
+
+<!-- JAWARI -->
+
+<div
+style="
+position:absolute;
+
+top:1080px;
+right:20px;
+
+width:120px;
+height:320px;
+
+overflow:hidden;
+
+border-radius:70px;
+">
+
+<img
+src="images/jawari.jpg"
+
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+">
+
+<div
+style="
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+font-weight:700;
+">
+
+JAWARI
+
+</div>
+
+</div>
+
+<!-- ORDER BUTTON -->
+
+<div
+style="
+position:absolute;
+
+top:1120px;
+left:50%;
+
+transform:translateX(-50%);
+">
+
+<a
+href="order.html"
+
+style="
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+width:220px;
+height:90px;
+
+border:3px solid white;
+
+border-radius:60px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:22px;
+font-weight:700;
+
+letter-spacing:2px;
+">
+
+ORDER NOW
+
+</a>
+
+</div>
+
+</section>
+
 <!-- SUMMARY -->
 
 <section
 style="
-padding:90px 25px;
-text-align:center;
 background:#000;
+padding:80px 25px;
+text-align:center;
+color:white;
 ">
 
 <h2
 style="
-font-size:30px;
+font-size:28px;
 font-weight:700;
 letter-spacing:3px;
-margin-bottom:40px;
+margin-bottom:35px;
 ">
 
 ABOUT OUR QUALITY
@@ -549,20 +796,20 @@ ABOUT OUR QUALITY
 style="
 max-width:1000px;
 margin:auto;
-font-size:15px;
-line-height:2.4;
+font-size:14px;
+line-height:2.3;
 letter-spacing:1px;
-color:#d5d5d5;
+color:#d0d0d0;
 ">
 
-AT OUR FLOUR MILL,
-WE ARE COMMITTED TO PROVIDING CLEAN,
+AT OUR FLOUR MILL, WE ARE COMMITTED TO PROVIDING CLEAN,
 FRESH AND HYGIENICALLY PROCESSED PRODUCTS.
 
 EVERY BATCH OF WHEAT FLOUR,
 JAWARI FLOUR,
-BAJRA FLOUR AND BESAN IS CAREFULLY SELECTED,
-TESTED AND PACKED TO MAINTAIN HIGH QUALITY STANDARDS.
+BAJRA FLOUR AND BESAN IS CAREFULLY
+SELECTED, TESTED AND PACKED TO MAINTAIN
+THE HIGHEST QUALITY STANDARDS.
 
 CUSTOMER SATISFACTION IS OUR PRIORITY.
 
@@ -578,13 +825,13 @@ FRESHNESS AND TRUST WITH EVERY ORDER.
 <section
 style="
 background:#000;
+padding:20px 20px 90px;
 text-align:center;
-padding:20px 20px 100px;
 ">
 
 <h2
 style="
-font-size:28px;
+font-size:26px;
 font-weight:700;
 letter-spacing:4px;
 margin-bottom:20px;
@@ -597,15 +844,15 @@ WHATSAPP
 <a
 href="https://wa.me/918459925150"
 style="
-text-decoration:none;
 color:white;
+text-decoration:none;
 ">
 
 <h1
 style="
-font-size:42px;
+font-size:40px;
 font-weight:800;
-letter-spacing:5px;
+letter-spacing:4px;
 ">
 
 8459925150
@@ -616,60 +863,21 @@ letter-spacing:5px;
 
 </section>
 
-<style>
-
-.footerTop{
-
-border-top:
-1px solid
-rgba(255,255,255,.08);
-
-padding-top:60px;
-
-}
-
-@media(max-width:900px){
-
-section h2{
-
-font-size:22px !important;
-
-}
-
-section h1{
-
-font-size:30px !important;
-
-}
-
-section div{
-
-font-size:13px !important;
-
-line-height:2.1 !important;
-
-}
-
-}
-
-</style>
-
-<div class="footerTop">
-
 <!-- FOOTER -->
 
 <footer
 style="
 background:#000;
+border-top:1px solid rgba(255,255,255,.08);
 padding:60px 20px;
 text-align:center;
 ">
 
 <h2
 style="
-font-size:32px;
+font-size:30px;
 font-weight:800;
-letter-spacing:4px;
+letter-spacing:3px;
 margin-bottom:20px;
 ">
 
@@ -679,12 +887,11 @@ SHADAB FLOUR MILL
 
 <p
 style="
-max-width:800px;
+max-width:700px;
 margin:auto;
-color:#bdbdbd;
 font-size:14px;
 line-height:2.2;
-letter-spacing:1px;
+color:#bdbdbd;
 ">
 
 PREMIUM QUALITY WHEAT FLOUR
@@ -713,19 +920,7 @@ KONDHWA • PUNE
 
 <div
 style="
-margin-top:35px;
-width:120px;
-height:1px;
-background:rgba(255,255,255,.15);
-margin-left:auto;
-margin-right:auto;
-">
-
-</div>
-
-<div
-style="
-margin-top:25px;
+margin-top:30px;
 color:#666;
 font-size:13px;
 letter-spacing:2px;
@@ -737,36 +932,5 @@ letter-spacing:2px;
 
 </footer>
 
-<style>
-
-@media(max-width:900px){
-
-footer{
-
-padding:45px 20px;
-
-}
-
-footer h2{
-
-font-size:24px !important;
-
-letter-spacing:2px !important;
-
-}
-
-footer p{
-
-font-size:12px !important;
-
-line-height:2 !important;
-
-}
-
-}
-
-</style>
-
 </body>
-
 </html>
