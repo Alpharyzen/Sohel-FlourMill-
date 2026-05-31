@@ -11,7 +11,7 @@ content="width=device-width,initial-scale=1.0">
 
 <title>
 
-Shadab Flour Mill Admin
+Shadab Flour Mill Admin V3
 
 </title>
 
@@ -25,6 +25,7 @@ rel="stylesheet">
 margin:0;
 padding:0;
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
@@ -35,7 +36,9 @@ color:white;
 
 font-family:'Montserrat',sans-serif;
 
-padding:20px;
+padding:18px;
+
+overflow-x:hidden;
 
 }
 
@@ -63,7 +66,7 @@ letter-spacing:2px;
 
 }
 
-.sub{
+.subTitle{
 
 font-size:12px;
 
@@ -75,9 +78,8 @@ margin-top:4px;
 
 .menuBtn{
 
-width:48px;
-
-height:48px;
+width:50px;
+height:50px;
 
 border:none;
 
@@ -93,23 +95,23 @@ cursor:pointer;
 
 }
 
-/* SIDE MENU */
+/* SIDEBAR */
 
-.sideMenu{
+.sidebar{
 
 position:fixed;
 
 top:0;
-left:-280px;
+left:-300px;
 
-width:260px;
+width:280px;
 height:100vh;
 
 background:#111;
 
-padding:25px;
-
 z-index:9999;
+
+padding:25px;
 
 transition:.35s;
 
@@ -117,45 +119,13 @@ border-right:1px solid rgba(255,255,255,.08);
 
 }
 
-.sideMenu.open{
+.sidebar.open{
 
 left:0;
 
 }
 
-.sideTitle{
-
-font-size:22px;
-
-font-family:'Cinzel',serif;
-
-margin-bottom:25px;
-
-}
-
-.menuItem{
-
-display:block;
-
-padding:15px;
-
-margin-bottom:10px;
-
-background:#1a1a1a;
-
-border-radius:14px;
-
-text-decoration:none;
-
-color:white;
-
-font-weight:600;
-
-cursor:pointer;
-
-}
-
-.menuOverlay{
+.overlay{
 
 position:fixed;
 
@@ -165,7 +135,7 @@ left:0;
 width:100%;
 height:100%;
 
-background:rgba(0,0,0,.65);
+background:rgba(0,0,0,.7);
 
 display:none;
 
@@ -173,9 +143,35 @@ z-index:9998;
 
 }
 
-.menuOverlay.show{
+.overlay.show{
 
 display:block;
+
+}
+
+.menuTitle{
+
+font-size:24px;
+
+font-family:'Cinzel',serif;
+
+margin-bottom:25px;
+
+}
+
+.menuItem{
+
+padding:16px;
+
+background:#1a1a1a;
+
+border-radius:16px;
+
+margin-bottom:12px;
+
+font-weight:600;
+
+cursor:pointer;
 
 }
 
@@ -194,7 +190,7 @@ margin-bottom:25px;
 
 }
 
-.stat{
+.statCard{
 
 background:#111;
 
@@ -203,8 +199,6 @@ border-radius:20px;
 padding:18px;
 
 text-align:center;
-
-border:1px solid rgba(255,255,255,.08);
 
 }
 
@@ -220,9 +214,9 @@ font-weight:800;
 
 font-size:12px;
 
-margin-top:6px;
-
 color:#aaa;
+
+margin-top:5px;
 
 }
 
@@ -252,8 +246,6 @@ font-size:22px;
 
 margin-bottom:15px;
 
-letter-spacing:1px;
-
 }
 
 .ordersContainer{
@@ -274,11 +266,11 @@ color:#000;
 
 border-radius:35px;
 
-padding:25px;
-
-overflow:hidden;
+padding:24px;
 
 box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+overflow:hidden;
 
 }
 
@@ -288,13 +280,13 @@ font-size:24px;
 
 font-weight:800;
 
-margin-bottom:8px;
+margin-bottom:6px;
 
 }
 
 .orderId{
 
-font-size:14px;
+font-size:13px;
 
 color:#666;
 
@@ -317,6 +309,8 @@ line-height:1.5;
 font-weight:700;
 
 }
+
+/* STATUS BADGES */
 
 .statusBadge{
 
@@ -408,9 +402,9 @@ cursor:pointer;
 
 }
 
-/* REAL SWIPE */
+/* REAL SWIPE TRACK */
 
-.swipeWrap{
+.swipeTrack{
 
 position:relative;
 
@@ -418,7 +412,7 @@ width:100%;
 
 height:64px;
 
-background:#e5e5e5;
+background:#e4e4e4;
 
 border-radius:32px;
 
@@ -428,7 +422,7 @@ margin-top:15px;
 
 }
 
-.swipeText{
+.swipeLabel{
 
 position:absolute;
 
@@ -450,7 +444,7 @@ pointer-events:none;
 
 }
 
-.swipeHandle{
+.swipeThumb{
 
 position:absolute;
 
@@ -471,13 +465,11 @@ font-size:22px;
 
 font-weight:700;
 
-cursor:pointer;
+color:white;
 
-user-select:none;
+cursor:grab;
 
 touch-action:none;
-
-color:white;
 
 }
 
@@ -519,7 +511,7 @@ opacity:.85;
 
 text-align:center;
 
-padding:35px 0;
+padding:40px 0;
 
 color:#888;
 
@@ -541,13 +533,13 @@ font-size:16px;
 
 }
 
-.swipeWrap{
+.swipeTrack{
 
 height:58px;
 
 }
 
-.swipeHandle{
+.swipeThumb{
 
 width:58px;
 height:58px;
@@ -563,17 +555,17 @@ height:58px;
 <body>
 
 <div
-id="menuOverlay"
-class="menuOverlay"
+id="overlay"
+class="overlay"
 onclick="closeMenu()">
 
 </div>
 
 <div
-id="sideMenu"
-class="sideMenu">
+id="sidebar"
+class="sidebar">
 
-<div class="sideTitle">
+<div class="menuTitle">
 
 ADMIN MENU
 
@@ -615,7 +607,7 @@ SHADAB FLOUR MILL
 
 </div>
 
-<div class="sub">
+<div class="subTitle">
 
 Delivery Boy Panel
 
@@ -635,7 +627,7 @@ onclick="openMenu()">
 
 <div class="dashboard">
 
-<div class="stat pending">
+<div class="statCard pending">
 
 <div
 id="pendingCount"
@@ -653,7 +645,7 @@ Pending
 
 </div>
 
-<div class="stat confirmed">
+<div class="statCard confirmed">
 
 <div
 id="confirmedCount"
@@ -671,7 +663,7 @@ Confirmed
 
 </div>
 
-<div class="stat delivery">
+<div class="statCard delivery">
 
 <div
 id="deliveryCount"
@@ -689,7 +681,7 @@ Out For Delivery
 
 </div>
 
-<div class="stat history">
+<div class="statCard history">
 
 <div
 id="historyCount"
@@ -795,11 +787,11 @@ window.openMenu=
 function(){
 
 document
-.getElementById("sideMenu")
+.getElementById("sidebar")
 .classList.add("open");
 
 document
-.getElementById("menuOverlay")
+.getElementById("overlay")
 .classList.add("show");
 
 };
@@ -808,11 +800,11 @@ window.closeMenu=
 function(){
 
 document
-.getElementById("sideMenu")
+.getElementById("sidebar")
 .classList.remove("open");
 
 document
-.getElementById("menuOverlay")
+.getElementById("overlay")
 .classList.remove("show");
 
 };
@@ -880,13 +872,17 @@ docId:d.id,
 
 });
 
-/* LATEST ORDER TOP */
+/* NEWEST FIRST */
 
 orders.sort(
 (a,b)=>
-new Date(b.createdAt)
+new Date(
+b.createdAt
+)
 -
-new Date(a.createdAt)
+new Date(
+a.createdAt
+)
 );
 
 let currentHtml="";
@@ -1040,35 +1036,39 @@ historyHtml ||
 
 };
 
-/* REAL SWIPE */
+/* =========================
+   REAL SWIPE ENGINE
+========================= */
 
-let activeHandle=null;
-let activeDoc=null;
+let activeThumb=null;
+let activeDocId=null;
 let activeStatus=null;
-let startX=0;
 
-window.startSwipe=
+let startX=0;
+let currentX=0;
+
+window.startSwipe =
 function(
-e,
+event,
 docId,
 status
 ){
 
-activeHandle=
-e.target;
+activeThumb=
+event.target;
 
-activeDoc=
+activeDocId=
 docId;
 
 activeStatus=
 status;
 
 startX=
-e.touches
+event.touches
 ?
-e.touches[0].clientX
+event.touches[0].clientX
 :
-e.clientX;
+event.clientX;
 
 document.addEventListener(
 "mousemove",
@@ -1092,39 +1092,69 @@ endSwipe
 
 };
 
-function moveSwipe(e){
+function moveSwipe(event){
 
-if(!activeHandle)return;
+if(!activeThumb)return;
 
-const x=
-e.touches
+currentX=
+event.touches
 ?
-e.touches[0].clientX
+event.touches[0].clientX
 :
-e.clientX;
+event.clientX;
 
 let diff=
-x-startX;
+currentX-startX;
 
-if(diff<0)diff=0;
+if(diff<0){
+diff=0;
+}
 
-if(diff>220)diff=220;
+const track=
+activeThumb.parentElement;
 
-activeHandle.style.left=
+const maxMove=
+
+track.offsetWidth
+-
+activeThumb.offsetWidth;
+
+if(diff>maxMove){
+
+diff=maxMove;
+
+}
+
+activeThumb.style.left=
 diff+"px";
 
 }
 
 async function endSwipe(){
 
-if(!activeHandle)return;
+if(!activeThumb)return;
 
-const pos=
+const track=
+activeThumb.parentElement;
+
+const maxMove=
+
+track.offsetWidth
+-
+activeThumb.offsetWidth;
+
+const currentLeft=
+
 parseInt(
-activeHandle.style.left
-)||0;
+activeThumb.style.left
+||0
+);
 
-if(pos>180){
+if(
+currentLeft
+>
+maxMove*0.75
+){
 
 let updateData={};
 
@@ -1134,7 +1164,8 @@ activeStatus=="Pending"
 
 updateData={
 
-status:"Confirmed",
+status:
+"Confirmed",
 
 confirmedAt:
 new Date()
@@ -1168,7 +1199,8 @@ activeStatus==
 
 updateData={
 
-status:"Delivered",
+status:
+"Delivered",
 
 deliveredAt:
 new Date()
@@ -1178,12 +1210,18 @@ new Date()
 
 }
 
+if(
+Object.keys(
+updateData
+).length
+){
+
 await updateDoc(
 
 doc(
 db,
 "orders",
-activeDoc
+activeDocId
 ),
 
 updateData
@@ -1192,14 +1230,42 @@ updateData
 
 }
 
-activeHandle.style.left=
+}
+
+activeThumb.style.left=
 "0px";
 
-activeHandle=null;
+activeThumb=null;
+
+activeDocId=null;
+
+activeStatus=null;
+
+document.removeEventListener(
+"mousemove",
+moveSwipe
+);
+
+document.removeEventListener(
+"mouseup",
+endSwipe
+);
+
+document.removeEventListener(
+"touchmove",
+moveSwipe
+);
+
+document.removeEventListener(
+"touchend",
+endSwipe
+);
 
 }
 
-/* REALTIME */
+/* =========================
+   REALTIME
+========================= */
 
 window.onload=
 function(){
@@ -1389,9 +1455,18 @@ window.open(
 
 </div>
 
-<div class="swipeWrap">
+${
+data.status!="Delivered"
+&&
+data.status!="Cancelled"
 
-<div class="swipeText">
+?
+
+`
+
+<div class="swipeTrack">
+
+<div class="swipeLabel">
 
 ${swipeText}
 
@@ -1399,12 +1474,12 @@ ${swipeText}
 
 <div
 class="
-swipeHandle
+swipeThumb
 ${swipeClass}
 "
 
 onmousedown="
-startSwipe(
+window.startSwipe(
 event,
 '${data.docId}',
 '${data.status}'
@@ -1412,7 +1487,7 @@ event,
 "
 
 ontouchstart="
-startSwipe(
+window.startSwipe(
 event,
 '${data.docId}',
 '${data.status}'
@@ -1425,6 +1500,30 @@ event,
 
 </div>
 
+`
+
+:
+
+`
+
+<div
+class="
+statusBadge
+deliveredBadge
+"
+style="
+margin-top:15px;
+font-size:15px;
+">
+
+✓ COMPLETED
+
+</div>
+
+`
+
+}
+
 </div>
 
 `;
@@ -1433,6 +1532,18 @@ event,
 
 window.createHistoryCard =
 function(data){
+
+let badgeClass=
+"deliveredBadge";
+
+if(
+data.status=="Cancelled"
+){
+
+badgeClass=
+"cancelledBadge";
+
+}
 
 return `
 
@@ -1446,27 +1557,55 @@ ${data.name || "Customer"}
 
 <div class="orderId">
 
+Order ID:
 ${data.orderId || "-"}
 
 </div>
 
 <div class="infoRow">
 
-📞
+<span class="label">
+
+📞 Phone:
+
+</span>
+
 ${data.phone || "-"}
 
 </div>
 
 <div class="infoRow">
 
-📍
+<span class="label">
+
+📍 Address:
+
+</span>
+
 ${data.address || "-"}
 
 </div>
 
 <div class="infoRow">
 
-💰
+<span class="label">
+
+⚖ Total KG:
+
+</span>
+
+${data.totalKg || 0}
+
+</div>
+
+<div class="infoRow">
+
+<span class="label">
+
+💰 Amount:
+
+</span>
+
 ₹${data.totalAmount || 0}
 
 </div>
@@ -1474,16 +1613,31 @@ ${data.address || "-"}
 <div
 class="
 statusBadge
-${
-data.status=="Cancelled"
-?
-"cancelledBadge"
-:
-"deliveredBadge"
-}
+${badgeClass}
 ">
 
 ${data.status}
+
+</div>
+
+<div
+style="
+margin-top:15px;
+font-size:13px;
+color:#666;
+">
+
+${
+data.status=="Delivered"
+?
+
+"Delivered Order"
+
+:
+
+"Cancelled Order"
+
+}
 
 </div>
 
@@ -1492,6 +1646,17 @@ ${data.status}
 `;
 
 };
+
+/* AUTO REFRESH COUNTERS */
+
+setInterval(
+()=>{
+
+loadOrders();
+
+},
+30000
+);
 
 </script>
 
