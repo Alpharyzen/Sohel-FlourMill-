@@ -1321,7 +1321,17 @@ swipeText=
 "SWIPE TO OUT FOR DELIVERY";
 
 }
+else if(
+data.status=="Delivered"
+){
 
+badgeClass=
+"deliveredBadge";
+
+badgeText=
+"Delivered";
+
+}
 else if(
 data.status==
 "Out For Delivery"
@@ -1340,7 +1350,17 @@ swipeText=
 "SWIPE TO DELIVERED";
 
 }
+else if(
+data.status=="Cancelled"
+){
 
+badgeClass=
+"cancelledBadge";
+
+badgeText=
+"Cancelled";
+
+}
 return `
 
 <div class="orderCard">
