@@ -664,7 +664,26 @@ data.status=="Delivered"
 &&
 data.deliveredAt
 ){
+if(
+data.status=="Cancelled"
+&&
+data.cancelledAt
+){
 
+const date=
+new Date(
+data.cancelledAt
+).toLocaleDateString();
+
+if(
+weekData[date]
+){
+
+weekData[date].push(data);
+
+}
+
+}
 const date=
 new Date(
 data.deliveredAt
