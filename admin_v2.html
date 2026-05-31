@@ -897,7 +897,7 @@ orders.forEach((data)=>{
 
 let moveToHistory=false;
 
-/* DELIVERED 10 MIN */
+/* DELIVERED 5 MIN */
 
 if(
 data.status=="Delivered"
@@ -919,7 +919,7 @@ data.deliveredAt
 /
 60;
 
-if(mins>10){
+if(mins>5){
 
 moveToHistory=true;
 
@@ -927,7 +927,7 @@ moveToHistory=true;
 
 }
 
-/* CANCELLED 10 MIN */
+/* CANCELLED 5 MIN */
 
 if(
 data.status=="Cancelled"
@@ -949,7 +949,7 @@ data.cancelledAt
 /
 60;
 
-if(mins>10){
+if(mins>5){
 
 moveToHistory=true;
 
