@@ -573,7 +573,10 @@ ADMIN MENU
 
 <div
 class="menuItem"
-onclick="scrollToHistory()">
+onclick="
+location.href=
+'history.html'
+">
 
 📦 History
 
@@ -681,23 +684,7 @@ Out For Delivery
 
 </div>
 
-<div class="statCard history">
 
-<div
-id="historyCount"
-class="statNumber">
-
-0
-
-</div>
-
-<div class="statLabel">
-
-History
-
-</div>
-
-</div>
 
 </div>
 
@@ -720,23 +707,6 @@ Loading Orders...
 </div>
 
 <br><br>
-
-<div
-id="historySection">
-
-<div class="sectionTitle">
-
-History
-
-</div>
-
-<div
-id="historyOrders"
-class="ordersContainer">
-
-</div>
-
-</div>
 
 <script type="module">
 
@@ -886,12 +856,12 @@ a.createdAt
 );
 
 let currentHtml="";
-let historyHtml="";
+
 
 let pendingCount=0;
 let confirmedCount=0;
 let deliveryCount=0;
-let historyCount=0;
+
 
 orders.forEach((data)=>{
 
@@ -957,18 +927,7 @@ moveToHistory=true;
 
 }
 
-if(moveToHistory){
 
-historyCount++;
-
-historyHtml +=
-createHistoryCard(
-data
-);
-
-return;
-
-}
 
 if(
 data.status=="Pending"
@@ -1017,10 +976,7 @@ document.getElementById(
 ).innerText=
 deliveryCount;
 
-document.getElementById(
-"historyCount"
-).innerText=
-historyCount;
+
 
 currentDiv.innerHTML=
 
@@ -1028,11 +984,7 @@ currentHtml ||
 
 '<div class="emptyText">No Active Orders</div>';
 
-historyDiv.innerHTML=
 
-historyHtml ||
-
-'<div class="emptyText">No History</div>';
 
 };
 
@@ -1550,122 +1502,7 @@ font-size:15px;
 
 };
 
-window.createHistoryCard =
-function(data){
 
-let badgeClass=
-"deliveredBadge";
-
-if(
-data.status=="Cancelled"
-){
-
-badgeClass=
-"cancelledBadge";
-
-}
-
-return `
-
-<div class="orderCard historyCard">
-
-<div class="customerName">
-
-${data.name || "Customer"}
-
-</div>
-
-<div class="orderId">
-
-Order ID:
-${data.orderId || "-"}
-
-</div>
-
-<div class="infoRow">
-
-<span class="label">
-
-📞 Phone:
-
-</span>
-
-${data.phone || "-"}
-
-</div>
-
-<div class="infoRow">
-
-<span class="label">
-
-📍 Address:
-
-</span>
-
-${data.address || "-"}
-
-</div>
-
-<div class="infoRow">
-
-<span class="label">
-
-⚖ Total KG:
-
-</span>
-
-${data.totalKg || 0}
-
-</div>
-
-<div class="infoRow">
-
-<span class="label">
-
-💰 Amount:
-
-</span>
-
-₹${data.totalAmount || 0}
-
-</div>
-
-<div
-class="
-statusBadge
-${badgeClass}
-">
-
-${data.status}
-
-</div>
-
-<div
-style="
-margin-top:15px;
-font-size:13px;
-color:#666;
-">
-
-${
-data.status=="Delivered"
-?
-
-"Delivered Order"
-
-:
-
-"Cancelled Order"
-
-}
-
-</div>
-
-</div>
-
-`;
-
-};
 
 /* AUTO REFRESH COUNTERS */
 
