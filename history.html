@@ -1,28 +1,538 @@
-<div class="topBar">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+
+Delivery History
+
+</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#000;
+
+color:white;
+
+font-family:'Montserrat',sans-serif;
+
+}
+
+/* HEADER */
+
+.hero{
+
+height:280px;
+
+background:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.45)
+),
+
+url(
+'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1200'
+);
+
+background-size:cover;
+background-position:center;
+
+padding:25px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+}
+
+.backBtn{
+
+width:130px;
+
+height:50px;
+
+border:none;
+
+border-radius:25px;
+
+background:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.heroCenter{
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+.heroTitle{
+
+font-family:'Cinzel',serif;
+
+font-size:60px;
+
+letter-spacing:2px;
+
+}
+
+.heroSub{
+
+font-size:18px;
+
+margin-top:10px;
+
+color:#ddd;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+padding:20px;
+
+}
+
+/* SUMMARY */
+
+.summaryGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:12px;
+
+margin-bottom:25px;
+
+}
+
+.summaryCard{
+
+background:#111;
+
+border-radius:20px;
+
+padding:18px;
+
+text-align:center;
+
+}
+
+.summaryNumber{
+
+font-size:28px;
+
+font-weight:800;
+
+}
+
+.summaryLabel{
+
+font-size:12px;
+
+color:#aaa;
+
+margin-top:6px;
+
+}
+
+.revenue{
+border-left:4px solid #4CAF50;
+}
+
+.delivered{
+border-left:4px solid #2196F3;
+}
+
+.cancelled{
+border-left:4px solid #F44336;
+}
+
+/* DATE SELECTOR */
+
+.dateTabs{
+
+display:flex;
+
+gap:12px;
+
+overflow-x:auto;
+
+padding:10px 0 20px;
+
+margin-bottom:20px;
+
+scrollbar-width:none;
+
+}
+
+.dateTabs::-webkit-scrollbar{
+
+display:none;
+
+}
+
+.dayCard{
+
+min-width:70px;
+
+text-align:center;
+
+cursor:pointer;
+
+}
+
+.dayName{
+
+font-size:13px;
+
+color:#999;
+
+margin-bottom:8px;
+
+}
+
+.dateCircle{
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+background:#111;
+
+border:2px solid #222;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:20px;
+
+font-weight:700;
+
+margin:auto;
+
+transition:.25s;
+
+}
+
+.dayCard.active .dateCircle{
+
+background:#f44336;
+
+border-color:#f44336;
+
+color:white;
+
+box-shadow:0 4px 15px rgba(244,67,54,.4);
+
+}
+
+.dayCard.active .dayName{
+
+color:#f44336;
+
+font-weight:700;
+
+}
+
+/* DATE TITLE */
+
+.selectedDate{
+
+font-size:22px;
+
+font-weight:800;
+
+margin-bottom:20px;
+
+color:white;
+
+}
+
+/* HISTORY CARD */
+
+.historyCard{
+
+background:#f5f5f5;
+
+color:#000;
+
+border-radius:35px;
+
+padding:25px;
+
+margin-bottom:18px;
+
+}
+
+.customerName{
+
+font-size:24px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
+}
+
+.infoRow{
+
+margin-bottom:12px;
+
+line-height:1.6;
+
+word-break:break-word;
+
+}
+
+.label{
+
+font-weight:700;
+
+}
+
+/* PRODUCT BOX */
+
+.productBox{
+
+margin-top:12px;
+
+padding:15px;
+
+background:#ececec;
+
+border-radius:16px;
+
+}
+
+.productTitle{
+
+font-weight:800;
+
+margin-bottom:10px;
+
+}
+
+.productItem{
+
+margin-bottom:6px;
+
+}
+
+/* DELIVERED BADGE */
+
+.deliveredBadge{
+
+margin-top:20px;
+
+display:inline-block;
+
+padding:12px 22px;
+
+background:#1dbf3a;
+
+color:white;
+
+border-radius:25px;
+
+font-weight:800;
+
+}
+
+/* EMPTY */
+
+.noOrders{
+
+background:#111;
+
+border-radius:20px;
+
+padding:30px;
+
+text-align:center;
+
+color:#999;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero{
+
+height:240px;
+
+}
+
+.heroTitle{
+
+font-size:44px;
+
+}
+
+.summaryGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.customerName{
+
+font-size:20px;
+
+}
+
+.dateCircle{
+
+width:55px;
+
+height:55px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
 
 <button
 class="backBtn"
-onclick="location.href='admin_v2.html'">
+onclick="
+location.href=
+'adminv3.html'
+">
 
 ← Orders
 
 </button>
 
-<h1>
-📜 Delivery History
-</h1>
+<div class="heroCenter">
+
+<div class="heroTitle">
+
+HISTORY
 
 </div>
 
-<div class="card">
+<div class="heroSub">
 
-<h2>
-📊 Last 7 Days Summary
-</h2>
+History Of Last 7 Days
 
-<div id="weekSummary">
+</div>
 
-Loading...
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="summaryGrid">
+
+<div
+class="
+summaryCard
+revenue
+">
+
+<div
+id="revenueTotal"
+class="summaryNumber">
+
+₹0
+
+</div>
+
+<div class="summaryLabel">
+
+Revenue
+
+</div>
+
+</div>
+
+<div
+class="
+summaryCard
+delivered
+">
+
+<div
+id="deliveredTotal"
+class="summaryNumber">
+
+0
+
+</div>
+
+<div class="summaryLabel">
+
+Delivered
+
+</div>
+
+</div>
+
+<div
+class="
+summaryCard
+cancelled
+">
+
+<div
+id="cancelledTotal"
+class="summaryNumber">
+
+0
+
+</div>
+
+<div class="summaryLabel">
+
+Cancelled
+
+</div>
 
 </div>
 
@@ -31,97 +541,29 @@ Loading...
 <div
 id="dateTabs"
 class="dateTabs">
+
 </div>
 
 <div
-id="selectedDateTitle"
-style="
-font-size:20px;
-font-weight:bold;
-margin-bottom:15px;
-color:#8B4513;
-">
+id="selectedDate"
+class="selectedDate">
+
+Loading...
+
 </div>
 
-<div id="history">
+<div
+id="historyContainer">
+
+<div class="noOrders">
 
 Loading History...
 
 </div>
 
-<style>
+</div>
 
-.dateTabs{
-display:flex;
-gap:12px;
-overflow-x:auto;
-padding:15px 0;
-margin-bottom:15px;
-}
-
-.dayCard{
-text-align:center;
-min-width:65px;
-cursor:pointer;
-}
-
-.dayName{
-font-size:14px;
-color:#666;
-margin-bottom:8px;
-}
-
-.dateCircle{
-width:55px;
-height:55px;
-border-radius:50%;
-border:2px solid #ddd;
-display:flex;
-align-items:center;
-justify-content:center;
-background:white;
-font-size:18px;
-margin:auto;
-}
-
-.active .dateCircle{
-background:#f44336;
-color:white;
-border:none;
-font-weight:bold;
-box-shadow:0 2px 10px rgba(244,67,54,.4);
-}
-
-.active .dayName{
-color:#f44336;
-font-weight:bold;
-}
-
-.orderItem{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-bottom:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.noHistory{
-background:white;
-padding:20px;
-text-align:center;
-border-radius:10px;
-color:#888;
-}
-
-.revenueCard{
-background:#4CAF50;
-color:white;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-</style>
+</div>
 
 <script type="module">
 
@@ -136,12 +578,25 @@ getDocs
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
-authDomain: "planning-with-ai-90e6a.firebaseapp.com",
-projectId: "planning-with-ai-90e6a",
-storageBucket: "planning-with-ai-90e6a.firebasestorage.app",
-messagingSenderId: "835817978059",
-appId: "1:835817978059:web:441596d86a28628c3fc34e"
+
+apiKey:
+"AIzaSyARITgbI7p5VAlwfwpbeZ653qzbsmLOpes",
+
+authDomain:
+"planning-with-ai-90e6a.firebaseapp.com",
+
+projectId:
+"planning-with-ai-90e6a",
+
+storageBucket:
+"planning-with-ai-90e6a.firebasestorage.app",
+
+messagingSenderId:
+"835817978059",
+
+appId:
+"1:835817978059:web:441596d86a28628c3fc34e"
+
 };
 
 const app =
@@ -150,10 +605,17 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-const weekData = {};
+const weekData={};
 
-const days =
-["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const days=[
+"Sun",
+"Mon",
+"Tue",
+"Wed",
+"Thu",
+"Fri",
+"Sat"
+];
 
 async function loadHistory(){
 
@@ -165,46 +627,50 @@ db,
 )
 );
 
-let totalRevenue = 0;
-let totalDeliveries = 0;
+let totalRevenue=0;
+let totalDelivered=0;
+let totalCancelled=0;
 
-for(let i=0;i<7;i++){
+/* LAST 7 DAYS */
 
-const d =
+for(
+let i=0;
+i<7;
+i++
+){
+
+const d=
 new Date();
 
 d.setDate(
 d.getDate()-i
 );
 
-const date =
+const date=
 d.toLocaleDateString();
 
-weekData[date] = [];
+weekData[date]=[];
 
 }
 
 snap.forEach((doc)=>{
 
-const data =
+const data=
 doc.data();
 
-if(
-data.status!="Delivered"
-){
-return;
-}
+/* DELIVERED */
 
 if(
-!data.deliveredAt
+data.status=="Delivered"
+&&
+data.deliveredAt
 ){
-return;
-}
 
-const date =
+const date=
 new Date(
 data.deliveredAt
-).toLocaleDateString();
+)
+.toLocaleDateString();
 
 if(
 weekData[date]
@@ -213,12 +679,26 @@ weekData[date]
 weekData[date]
 .push(data);
 
+}
+
 totalRevenue +=
 Number(
-data.totalAmount || 0
+data.totalAmount
+||
+0
 );
 
-totalDeliveries++;
+totalDelivered++;
+
+}
+
+/* CANCELLED */
+
+if(
+data.status=="Cancelled"
+){
+
+totalCancelled++;
 
 }
 
@@ -226,27 +706,26 @@ totalDeliveries++;
 
 document
 .getElementById(
-"weekSummary"
+"revenueTotal"
 )
-.innerHTML =
+.innerText=
 
-`
-<div class="revenueCard">
+"₹"+
+totalRevenue;
 
-💰 Revenue
+document
+.getElementById(
+"deliveredTotal"
+)
+.innerText=
+totalDelivered;
 
-<br><br>
-
-₹${totalRevenue}
-
-<br><br>
-
-📦 Deliveries
-
-${totalDeliveries}
-
-</div>
-`;
+document
+.getElementById(
+"cancelledTotal"
+)
+.innerText=
+totalCancelled;
 
 generateDateTabs();
 
@@ -254,23 +733,27 @@ generateDateTabs();
 
 function generateDateTabs(){
 
-const tabs =
+const tabs=
 document.getElementById(
 "dateTabs"
 );
 
 tabs.innerHTML="";
 
-for(let i=6;i>=0;i--){
+for(
+let i=6;
+i>=0;
+i--
+){
 
-const d =
+const d=
 new Date();
 
 d.setDate(
 d.getDate()-i
 );
 
-const date =
+const date=
 d.toLocaleDateString();
 
 tabs.innerHTML += `
@@ -286,7 +769,9 @@ this,
 
 <div class="dayName">
 
-${days[d.getDay()]}
+${days[
+d.getDay()
+]}
 
 </div>
 
@@ -304,14 +789,19 @@ ${d.getDate()}
 
 setTimeout(()=>{
 
-const first =
-document.querySelector(
-".dayCard:last-child"
+const latest=
+
+document.querySelectorAll(
+".dayCard"
 );
 
-if(first){
+if(
+latest.length
+){
 
-first.click();
+latest[
+latest.length-1
+].click();
 
 }
 
@@ -320,94 +810,188 @@ first.click();
 }
 
 window.showHistoryDate =
-function(el,date){
+function(
+element,
+date
+){
 
 document
 .querySelectorAll(
 ".dayCard"
 )
-.forEach(x=>
-x.classList.remove(
+.forEach(card=>{
+
+card.classList.remove(
 "active"
-)
 );
 
-el.classList.add(
+});
+
+element.classList.add(
 "active"
 );
 
 document
 .getElementById(
-"selectedDateTitle"
+"selectedDate"
 )
-.innerHTML =
+.innerHTML=
 
 "📅 " + date;
 
-const history =
+const container=
+
 document.getElementById(
-"history"
+"historyContainer"
 );
 
-history.innerHTML="";
+container.innerHTML="";
 
-const orders =
-weekData[date] || [];
+const orders=
+
+weekData[
+date
+] || [];
 
 if(
 orders.length==0
 ){
 
-history.innerHTML =
+container.innerHTML=
 
 `
-<div class="noHistory">
 
-❌ No Order History
+<div class="noOrders">
+
+❌ No Orders Found
 
 </div>
+
 `;
 
 return;
 
 }
 
+/* NEWEST FIRST */
+
+orders.sort(
+(a,b)=>
+new Date(
+b.deliveredAt
+)
+-
+new Date(
+a.deliveredAt
+)
+);
+
 orders.forEach((o)=>{
 
-history.innerHTML += `
+container.innerHTML += `
 
-<div class="orderItem">
+<div class="historyCard">
 
-👤
-${o.customerName}
+<div class="customerName">
 
-<br><br>
+${o.name ||
+o.customerName ||
+"Customer"}
 
-📍
-${o.address}
+</div>
 
-<br><br>
+<div class="infoRow">
+
+<span class="label">
+
+📞 Phone:
+
+</span>
+
+${o.phone || "-"}
+
+</div>
+
+<div class="infoRow">
+
+<span class="label">
+
+📍 Address:
+
+</span>
+
+${o.address || "-"}
+
+</div>
+
+<div class="infoRow">
+
+<span class="label">
+
+⚖ Total KG:
+
+</span>
+
+${o.totalKg || 0}
+
+</div>
+
+<div class="infoRow">
+
+<span class="label">
+
+💰 Amount:
+
+</span>
+
+₹${o.totalAmount || 0}
+
+</div>
+
+<div class="productBox">
+
+<div class="productTitle">
 
 📦 Products
 
-<br><br>
+</div>
 
-${(o.items || []).map(i => `
-• ${i.product}
- - ${i.qty} KG
-<br>
-`).join("")}
+${(o.items || [])
+.map(item => `
 
-<br>
+<div class="productItem">
 
-💰 ₹${o.totalAmount}
+• ${item.product}
+- ${item.qty} KG
 
-<br><br>
+</div>
 
-⏰
+`)
+.join("")}
+
+</div>
+
+<div
+class="deliveredBadge">
+
+✅ DELIVERED
+
+</div>
+
+<div
+style="
+margin-top:15px;
+font-size:14px;
+color:#666;
+">
+
+🕒
+
 ${new Date(
 o.deliveredAt
 ).toLocaleTimeString()}
+
+</div>
 
 </div>
 
@@ -419,7 +1003,20 @@ o.deliveredAt
 
 loadHistory();
 
+/* AUTO REFRESH EVERY 30 SEC */
+
+setInterval(
+()=>{
+
+loadHistory();
+
+},
+30000
+
+);
+
 </script>
 
 </body>
+
 </html>
