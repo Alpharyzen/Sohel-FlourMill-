@@ -835,7 +835,7 @@ db,
 );
 
 const orders=[];
-let currentOrderCount = 0;
+
 snap.forEach((d)=>{
 
 orders.push({
@@ -845,7 +845,7 @@ docId:d.id,
 ...d.data()
 
 });
-currentOrderCount++;
+
 });
 
 /* NEWEST FIRST */
@@ -993,25 +993,7 @@ currentHtml ||
 
 
 };
-if(
-lastOrderCount > 0 &&
-currentOrderCount > lastOrderCount
-){
 
-document
-.getElementById(
-"newOrderAlarm"
-)
-.play();
-
-alert(
-"🚨 New Order Received!"
-);
-
-}
-
-lastOrderCount =
-currentOrderCount;
 /* =========================
    REAL SWIPE ENGINE
 ========================= */
@@ -1540,15 +1522,7 @@ loadOrders();
 );
 
 </script>
-<audio
-id="newOrderAlarm"
-preload="auto">
 
-<source
-src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
-type="audio/ogg">
-
-</audio>
 </body>
 
 </html>
