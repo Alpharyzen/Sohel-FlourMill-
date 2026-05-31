@@ -111,9 +111,9 @@ border-radius:15px;
 
 margin-top:12px;
 
-background:#8B4513;
+background:white;
 
-color:white;
+color:black;
 
 font-size:17px;
 
@@ -348,7 +348,21 @@ font-size:13px;
 font-weight:600;
 
 }
+.statusTimes{
 
+display:flex;
+
+justify-content:space-between;
+
+margin-top:15px;
+
+font-size:12px;
+
+text-align:center;
+
+font-weight:600;
+
+}
 .cancelBtn{
 
 width:100%;
@@ -722,7 +736,7 @@ trackerHtml=`
 
 }
 
-currentHtml += `
+currentHtml -= `
 
 <div class="orderCard">
 
@@ -757,7 +771,9 @@ onclick="toggleCard(${index})">
 
 <div
 class="cardDetails"
-id="card${index}">
+id="card${index}"
+
+style="display:block;">
 
 <div class="infoRow">
 
@@ -840,7 +856,51 @@ Delivered
 </span>
 
 </div>
+<div class="statusTimes">
 
+<div>
+
+Order
+
+<br>
+
+${new Date(
+data.createdAt
+).toLocaleTimeString()}
+
+</div>
+
+<div>
+
+Confirmed
+
+<br>
+
+${data.confirmedAt || "-"}
+
+</div>
+
+<div>
+
+Delivery
+
+<br>
+
+${data.outForDeliveryAt || "-"}
+
+</div>
+
+<div>
+
+Delivered
+
+<br>
+
+${data.deliveredAt || "-"}
+
+</div>
+
+</div>
 `;
 
 if(
@@ -958,15 +1018,43 @@ data.createdAt
 
 </div>
 
+<div class="tracker">
+
+<div class="dot active"></div>
+
+<div class="line active"></div>
+
+<div class="truck active">
+
+🚚
+
+</div>
+
+<div class="line active"></div>
+
+<div class="dot active"></div>
+
+</div>
+
+<div class="trackerLabels">
+
+<span>Confirm</span>
+
+<span>Out For Delivery</span>
+
+<span>Delivered</span>
+
+</div>
+
 <div
 style="
-margin-top:20px;
-font-size:18px;
-font-weight:700;
-color:#27c93f;
+margin-top:15px;
+text-align:center;
+font-size:14px;
 ">
 
-${data.status}
+Delivered:
+${data.deliveredAt || "-"}
 
 </div>
 
