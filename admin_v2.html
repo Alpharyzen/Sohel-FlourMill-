@@ -11,7 +11,7 @@ content="width=device-width,initial-scale=1.0">
 
 <title>
 
-Shadab Flour Mill Admin V3
+Shadab Flour Mill Admin V2
 
 </title>
 
@@ -182,7 +182,7 @@ cursor:pointer;
 display:grid;
 
 grid-template-columns:
-repeat(2,1fr);
+repeat(3,1fr);
 
 gap:12px;
 
@@ -232,10 +232,6 @@ border-left:4px solid #2196f3;
 border-left:4px solid #ff7043;
 }
 
-.history{
-border-left:4px solid #4caf50;
-}
-
 /* SECTION */
 
 .sectionTitle{
@@ -258,15 +254,17 @@ gap:18px;
 
 }
 
+/* ORDER CARD */
+
 .orderCard{
 
 background:#f5f5f5;
 
 color:#000;
 
-border-radius:35px;
+border-radius:30px;
 
-padding:24px;
+padding:22px;
 
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 
@@ -296,7 +294,7 @@ margin-bottom:15px;
 
 .infoRow{
 
-margin-bottom:10px;
+margin-bottom:12px;
 
 font-size:15px;
 
@@ -316,7 +314,27 @@ font-weight:700;
 
 }
 
-/* STATUS BADGES */
+/* ADDRESS BOX */
+
+.addressBox{
+
+margin-top:8px;
+
+padding:12px;
+
+background:#ececec;
+
+border-radius:14px;
+
+line-height:1.7;
+
+word-break:break-word;
+
+white-space:normal;
+
+}
+
+/* STATUS */
 
 .statusBadge{
 
@@ -373,7 +391,6 @@ background:#ffebee;
 color:#f44336;
 
 }
-
 /* ACTION BUTTONS */
 
 .actionRow{
@@ -392,7 +409,7 @@ margin-bottom:20px;
 
 flex:1;
 
-height:48px;
+height:50px;
 
 border:none;
 
@@ -408,7 +425,7 @@ cursor:pointer;
 
 }
 
-/* REAL SWIPE TRACK */
+/* SWIPE TRACK */
 
 .swipeTrack{
 
@@ -477,6 +494,8 @@ cursor:grab;
 
 touch-action:none;
 
+user-select:none;
+
 }
 
 .swipePending{
@@ -497,17 +516,114 @@ background:#ff7043;
 
 }
 
-.swipeDone{
+/* NEW ORDER POPUP */
 
-background:#4caf50;
+.alarmModal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.8);
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:10000;
 
 }
 
-/* HISTORY */
+.alarmModal.show{
 
-.historyCard{
+display:flex;
 
-opacity:.85;
+}
+
+.alarmBox{
+
+width:90%;
+max-width:350px;
+
+background:white;
+
+color:black;
+
+border-radius:25px;
+
+padding:25px;
+
+text-align:center;
+
+animation:pop .25s ease;
+
+}
+
+@keyframes pop{
+
+from{
+
+transform:scale(.8);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
+
+.alarmTitle{
+
+font-size:24px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
+color:#f44336;
+
+}
+
+.alarmText{
+
+font-size:16px;
+
+margin-bottom:20px;
+
+}
+
+.alarmBtn{
+
+width:100%;
+
+height:50px;
+
+border:none;
+
+border-radius:14px;
+
+background:#f44336;
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
 
 }
 
@@ -527,15 +643,16 @@ font-size:16px;
 
 @media(max-width:900px){
 
-.customerName{
+.dashboard{
 
-font-size:21px;
+grid-template-columns:
+repeat(2,1fr);
 
 }
 
-.actionBtn{
+.customerName{
 
-font-size:16px;
+font-size:21px;
 
 }
 
@@ -557,8 +674,53 @@ height:58px;
 </style>
 
 </head>
-
 <body>
+
+<!-- NEW ORDER ALARM -->
+
+<audio
+id="newOrderAlarm"
+preload="auto">
+
+<source
+src="alarm.mp4"
+type="audio/mp4">
+
+</audio>
+
+<!-- ALARM POPUP -->
+
+<div
+id="alarmModal"
+class="alarmModal">
+
+<div class="alarmBox">
+
+<div class="alarmTitle">
+
+🚨 NEW ORDER
+
+</div>
+
+<div class="alarmText">
+
+A new customer order has arrived.
+
+</div>
+
+<button
+class="alarmBtn"
+onclick="stopAlarm()">
+
+OK
+
+</button>
+
+</div>
+
+</div>
+
+<!-- SIDEBAR -->
 
 <div
 id="overlay"
@@ -606,6 +768,8 @@ onclick="logout()">
 
 </div>
 
+<!-- HEADER -->
+
 <div class="header">
 
 <div>
@@ -633,6 +797,8 @@ onclick="openMenu()">
 </button>
 
 </div>
+
+<!-- DASHBOARD -->
 
 <div class="dashboard">
 
@@ -690,9 +856,9 @@ Out For Delivery
 
 </div>
 
-
-
 </div>
+
+<!-- ORDERS -->
 
 <div class="sectionTitle">
 
@@ -712,10 +878,7 @@ Loading Orders...
 
 </div>
 
-<br><br>
-
 <script type="module">
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
@@ -757,6 +920,8 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
+let lastPendingCount = 0;
+
 /* MENU */
 
 window.openMenu=
@@ -785,23 +950,6 @@ document
 
 };
 
-window.scrollToHistory=
-function(){
-
-closeMenu();
-
-document
-.getElementById(
-"historySection"
-)
-.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-};
-
 window.logout=
 function(){
 
@@ -811,6 +959,63 @@ location.reload();
 
 };
 
+/* ALARM */
+
+window.stopAlarm=
+function(){
+
+const alarm=
+document.getElementById(
+"newOrderAlarm"
+);
+
+alarm.pause();
+
+alarm.currentTime=0;
+
+document
+.getElementById(
+"alarmModal"
+)
+.classList.remove(
+"show"
+);
+
+};
+
+function triggerNewOrderAlarm(){
+
+const alarm=
+document.getElementById(
+"newOrderAlarm"
+);
+
+alarm.currentTime=0;
+
+alarm.loop=true;
+
+alarm.play().catch(()=>{});
+
+document
+.getElementById(
+"alarmModal"
+)
+.classList.add(
+"show"
+);
+
+if(
+navigator.vibrate
+){
+
+navigator.vibrate(
+[500,300,500,300,500]
+);
+
+}
+
+}
+
 /* LOAD ORDERS */
 
 window.loadOrders =
@@ -819,11 +1024,6 @@ async function(){
 const currentDiv =
 document.getElementById(
 "currentOrders"
-);
-
-const historyDiv =
-document.getElementById(
-"historyOrders"
 );
 
 const snap =
@@ -836,17 +1036,44 @@ db,
 
 const orders=[];
 
+let currentPendingCount=0;
+
 snap.forEach((d)=>{
+
+const data=d.data();
 
 orders.push({
 
 docId:d.id,
 
-...d.data()
+...data
 
 });
 
+if(
+data.status=="Pending"
+){
+
+currentPendingCount++;
+
+}
+
 });
+
+/* NEW ORDER DETECTION */
+
+if(
+lastPendingCount > 0 &&
+currentPendingCount >
+lastPendingCount
+){
+
+triggerNewOrderAlarm();
+
+}
+
+lastPendingCount=
+currentPendingCount;
 
 /* NEWEST FIRST */
 
@@ -863,17 +1090,12 @@ a.createdAt
 
 let currentHtml="";
 
-
 let pendingCount=0;
 let confirmedCount=0;
 let deliveryCount=0;
-
-
 orders.forEach((data)=>{
 
-let moveToHistory=false;
-
-/* DELIVERED 5 MIN */
+/* HIDE OLD DELIVERED */
 
 if(
 data.status=="Delivered"
@@ -897,13 +1119,13 @@ data.deliveredAt
 
 if(mins>5){
 
-moveToHistory=true;
+return;
 
 }
 
 }
 
-/* CANCELLED 5 MIN */
+/* HIDE OLD CANCELLED */
 
 if(
 data.status=="Cancelled"
@@ -927,13 +1149,11 @@ data.cancelledAt
 
 if(mins>5){
 
-moveToHistory=true;
+return;
 
 }
 
 }
-
-
 
 if(
 data.status=="Pending"
@@ -967,45 +1187,76 @@ data
 
 });
 
-document.getElementById(
+document
+.getElementById(
 "pendingCount"
-).innerText=
+)
+.innerText=
 pendingCount;
 
-document.getElementById(
+document
+.getElementById(
 "confirmedCount"
-).innerText=
+)
+.innerText=
 confirmedCount;
 
-document.getElementById(
+document
+.getElementById(
 "deliveryCount"
-).innerText=
+)
+.innerText=
 deliveryCount;
 
-
-
-currentDiv.innerHTML=
+currentDiv.innerHTML =
 
 currentHtml ||
 
-'<div class="emptyText">No Active Orders</div>';
+`
 
+<div class="emptyText">
 
+No Active Orders
+
+</div>
+
+`;
 
 };
 
-/* =========================
-   REAL SWIPE ENGINE
-========================= */
+/* REALTIME FIREBASE */
+
+window.onload=
+function(){
+
+loadOrders();
+
+onSnapshot(
+
+collection(
+db,
+"orders"
+),
+
+()=>{
+
+loadOrders();
+
+}
+
+);
+
+};
+
+/* REAL SWIPE ENGINE */
 
 let activeThumb=null;
 let activeDocId=null;
 let activeStatus=null;
 
 let startX=0;
-let currentX=0;
 
-window.startSwipe =
+window.startSwipe=
 function(
 event,
 docId,
@@ -1049,12 +1300,11 @@ endSwipe
 );
 
 };
-
 function moveSwipe(event){
 
 if(!activeThumb)return;
 
-currentX=
+const currentX=
 event.touches
 ?
 event.touches[0].clientX
@@ -1109,8 +1359,7 @@ activeThumb.style.left
 );
 
 if(
-currentLeft
->
+currentLeft >
 maxMove*0.75
 ){
 
@@ -1122,8 +1371,7 @@ activeStatus=="Pending"
 
 updateData={
 
-status:
-"Confirmed",
+status:"Confirmed",
 
 confirmedAt:
 new Date()
@@ -1157,8 +1405,7 @@ activeStatus==
 
 updateData={
 
-status:
-"Delivered",
+status:"Delivered",
 
 deliveredAt:
 new Date()
@@ -1194,9 +1441,7 @@ activeThumb.style.left=
 "0px";
 
 activeThumb=null;
-
 activeDocId=null;
-
 activeStatus=null;
 
 document.removeEventListener(
@@ -1220,32 +1465,6 @@ endSwipe
 );
 
 }
-
-/* =========================
-   REALTIME
-========================= */
-
-window.onload=
-function(){
-
-loadOrders();
-
-onSnapshot(
-
-collection(
-db,
-"orders"
-),
-
-()=>{
-
-loadOrders();
-
-}
-
-);
-
-};
 
 window.createOrderCard =
 function(data){
@@ -1279,17 +1498,7 @@ swipeText=
 "SWIPE TO OUT FOR DELIVERY";
 
 }
-else if(
-data.status=="Delivered"
-){
 
-badgeClass=
-"deliveredBadge";
-
-badgeText=
-"Delivered";
-
-}
 else if(
 data.status==
 "Out For Delivery"
@@ -1308,6 +1517,19 @@ swipeText=
 "SWIPE TO DELIVERED";
 
 }
+
+else if(
+data.status=="Delivered"
+){
+
+badgeClass=
+"deliveredBadge";
+
+badgeText=
+"Delivered";
+
+}
+
 else if(
 data.status=="Cancelled"
 ){
@@ -1319,6 +1541,7 @@ badgeText=
 "Cancelled";
 
 }
+
 return `
 
 <div class="orderCard">
@@ -1356,7 +1579,11 @@ ${data.phone || "-"}
 
 </span>
 
+<div class="addressBox">
+
 ${data.address || "-"}
+
+</div>
 
 </div>
 
@@ -1507,10 +1734,6 @@ font-size:15px;
 `;
 
 };
-
-
-
-/* AUTO REFRESH COUNTERS */
 
 setInterval(
 ()=>{
