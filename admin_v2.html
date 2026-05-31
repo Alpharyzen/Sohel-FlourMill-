@@ -705,7 +705,15 @@ height:58px;
 
 </head>
 <body>
+<audio
+id="orderPlayer"
+loop>
 
+<source
+src="alarm.mp4"
+type="audio/mp4">
+
+</audio>
 <!-- HIDDEN ORDER PLAYER -->
 
 <audio
@@ -899,7 +907,51 @@ Out For Delivery
 </div>
 
 </div>
+<div
+style="
+background:#111;
+padding:15px;
+border-radius:18px;
+margin-bottom:15px;
+display:flex;
+gap:10px;
+">
 
+<button
+style="
+flex:1;
+height:50px;
+border:none;
+border-radius:12px;
+background:#4CAF50;
+color:white;
+font-size:16px;
+font-weight:700;
+"
+onclick="playTestMusic()">
+
+▶ PLAY ALARM
+
+</button>
+
+<button
+style="
+flex:1;
+height:50px;
+border:none;
+border-radius:12px;
+background:#F44336;
+color:white;
+font-size:16px;
+font-weight:700;
+"
+onclick="stopTestMusic()">
+
+⏹ STOP ALARM
+
+</button>
+
+</div>
 <!-- CURRENT ORDERS -->
 
 <div class="sectionTitle">
@@ -1010,7 +1062,47 @@ document
 
 window.logout=
 function(){
+window.playTestMusic=
+function(){
 
+const player=
+document.getElementById(
+"orderPlayer"
+);
+
+player.currentTime=0;
+
+player.play()
+.then(()=>{
+
+console.log(
+"PLAYING"
+);
+
+})
+.catch(err=>{
+
+alert(
+err
+);
+
+});
+
+};
+
+window.stopTestMusic=
+function(){
+
+const player=
+document.getElementById(
+"orderPlayer"
+);
+
+player.pause();
+
+player.currentTime=0;
+
+};
 localStorage.clear();
 
 location.reload();
