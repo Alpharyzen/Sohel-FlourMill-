@@ -654,15 +654,21 @@ trackerHtml=`
 
 <div class="tracker">
 
-<div class="dot active"></div>
+<div class="truck">
+⚪
+</div>
 
 <div class="line"></div>
 
-<div class="truck">🚚</div>
+<div class="truck">
+⚪
+</div>
 
 <div class="line"></div>
 
-<div class="dot"></div>
+<div class="truck">
+⚪
+</div>
 
 </div>
 
@@ -676,15 +682,21 @@ trackerHtml=`
 
 <div class="tracker">
 
-<div class="dot active"></div>
+<div class="truck active">
+✅
+</div>
 
 <div class="line active"></div>
 
-<div class="truck active">🚚</div>
+<div class="truck">
+⚪
+</div>
 
 <div class="line"></div>
 
-<div class="dot"></div>
+<div class="truck">
+⚪
+</div>
 
 </div>
 
@@ -698,15 +710,21 @@ trackerHtml=`
 
 <div class="tracker">
 
-<div class="dot active"></div>
+<div class="truck active">
+✅
+</div>
 
 <div class="line active"></div>
 
-<div class="truck active">🚚</div>
+<div class="truck active">
+🚚
+</div>
 
-<div class="line active"></div>
+<div class="line"></div>
 
-<div class="dot"></div>
+<div class="truck">
+⚪
+</div>
 
 </div>
 
@@ -714,21 +732,27 @@ trackerHtml=`
 
 }
 
-else{
+else if(data.status=="Delivered"){
 
 trackerHtml=`
 
 <div class="tracker">
 
-<div class="dot active"></div>
+<div class="truck active">
+✅
+</div>
 
 <div class="line active"></div>
 
-<div class="truck active">🚚</div>
+<div class="truck active">
+🚚
+</div>
 
 <div class="line active"></div>
 
-<div class="dot active"></div>
+<div class="truck active">
+✅
+</div>
 
 </div>
 
