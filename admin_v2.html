@@ -920,7 +920,7 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-let lastPendingCount = 0;
+let lastPendingCount = 1;
 
 /* MENU */
 
@@ -1063,9 +1063,8 @@ currentPendingCount++;
 /* NEW ORDER DETECTION */
 
 if(
-lastPendingCount > 0 &&
-currentPendingCount >
-lastPendingCount
+lastPendingCount >= 0 &&
+currentPendingCount > lastPendingCount
 ){
 
 triggerNewOrderAlarm();
@@ -1103,6 +1102,26 @@ data.status=="Delivered"
 data.deliveredAt
 ){
 
+else if(
+data.status=="Cancelled"
+&&
+data.cancelledAt
+){
+
+const date=
+new Date(
+data.cancelledAt
+).toLocaleDateString();
+
+if(
+weekData[date]
+){
+
+weekData[date].push(data);
+
+}
+
+}
 const mins=
 
 (
@@ -1148,6 +1167,8 @@ data.cancelledAt
 60;
 
 if(mins>5){
+
+data.hidden=true;
 
 return;
 
