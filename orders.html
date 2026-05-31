@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta
+name="viewport"
 content="width=device-width,initial-scale=1.0">
 
 <title>
-My Orders
+
+Tracking Order
+
 </title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -17,69 +25,392 @@ My Orders
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
 }
 
 body{
-background:#f4f4f4;
-padding:15px;
+
+background:#000;
+
+color:white;
+
+font-family:'Montserrat',sans-serif;
+
+padding:25px;
+
 }
 
-.header{
-background:#8B4513;
-color:white;
-padding:15px;
-border-radius:12px;
-text-align:center;
+.pageTitle{
+
+font-family:'Cinzel',serif;
+
+font-size:34px;
+
+letter-spacing:3px;
+
+margin-bottom:40px;
+
+}
+
+.sectionTitle{
+
+font-family:'Cinzel',serif;
+
+font-size:24px;
+
+letter-spacing:2px;
+
 margin-bottom:20px;
+
 }
 
-.card{
-background:white;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+.searchCard{
+
+background:#111;
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:25px;
+
+padding:20px;
+
+margin-bottom:35px;
+
 }
 
-input{
+.searchInput{
+
 width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:8px;
-margin-top:10px;
-}
 
-button{
-width:100%;
-padding:12px;
+height:55px;
+
 border:none;
-border-radius:8px;
-background:#8B4513;
+
+outline:none;
+
+background:#1a1a1a;
+
+border-radius:15px;
+
+padding:15px;
+
 color:white;
-margin-top:10px;
+
+font-size:16px;
+
+}
+
+.searchBtn{
+
+width:100%;
+
+height:55px;
+
+border:none;
+
+border-radius:15px;
+
+margin-top:12px;
+
+background:#8B4513;
+
+color:white;
+
+font-size:17px;
+
+font-weight:700;
+
 cursor:pointer;
+
 }
 
-.status{
-font-weight:bold;
-margin-top:10px;
+.orderCounter{
+
+font-size:22px;
+
+margin-bottom:20px;
+
+font-family:'Cinzel',serif;
+
 }
 
-.pending{
-color:#ff9800;
+.orderCounter span{
+
+color:#d9d9d9;
+
 }
 
-.confirmed{
-color:#4CAF50;
+.currentOrders{
+
+margin-bottom:40px;
+
 }
 
-.delivery{
-color:#2196F3;
+.previousOrders{
+
+margin-top:50px;
+
 }
 
-.delivered{
-color:#009688;
+.orderContainer{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+.orderCard{
+
+background:#f5f5f5;
+
+color:#000;
+
+border-radius:40px;
+
+padding:30px;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.cardHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.customerName{
+
+font-size:28px;
+
+font-weight:700;
+
+line-height:1.2;
+
+}
+
+.expandBtn{
+
+width:45px;
+
+height:45px;
+
+border:none;
+
+border-radius:50%;
+
+background:#000;
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+.cardDetails{
+
+display:none;
+
+margin-top:20px;
+
+}
+
+.infoRow{
+
+margin-bottom:12px;
+
+font-size:16px;
+
+line-height:1.6;
+
+}
+
+.infoLabel{
+
+font-weight:700;
+
+}
+
+.dateTimeRow{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-top:20px;
+
+margin-bottom:25px;
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+.tracker{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-top:15px;
+
+}
+
+.dot{
+
+width:18px;
+
+height:18px;
+
+border-radius:50%;
+
+background:#cfcfcf;
+
+}
+
+.dot.active{
+
+background:#27c93f;
+
+}
+
+.line{
+
+width:90px;
+
+height:4px;
+
+background:#cfcfcf;
+
+}
+
+.line.active{
+
+background:#27c93f;
+
+}
+
+.truck{
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+background:#d9d9d9;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:26px;
+
+}
+
+.truck.active{
+
+background:#2196F3;
+
+color:white;
+
+}
+
+.trackerLabels{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:15px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.cancelBtn{
+
+width:100%;
+
+height:50px;
+
+margin-top:20px;
+
+border:none;
+
+border-radius:15px;
+
+background:#d32f2f;
+
+color:white;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.noOrders{
+
+text-align:center;
+
+color:#bdbdbd;
+
+font-size:18px;
+
+padding:40px 0;
+
+}
+
+@media(max-width:900px){
+
+.pageTitle{
+
+font-size:26px;
+
+}
+
+.customerName{
+
+font-size:22px;
+
+}
+
+.line{
+
+width:55px;
+
+}
+
+.trackerLabels{
+
+font-size:11px;
+
+}
+
 }
 
 </style>
@@ -88,32 +419,66 @@ color:#009688;
 
 <body>
 
-<div class="header">
+<div class="pageTitle">
 
-<h2>
-📦 My Orders
-</h2>
+TRACKING ORDER
 
 </div>
 
-<div class="card">
+<div class="searchCard">
 
 <input
 id="trackPhone"
+class="searchInput"
 placeholder="Enter Mobile Number">
 
 <button
+class="searchBtn"
 onclick="loadOrders()">
 
-View Orders
+TRACK ORDER
 
 </button>
 
 </div>
 
-<div id="orders">
+<div class="currentOrders">
+
+<div class="orderCounter">
+
+Current Orders
+(<span id="currentCount">0</span>)
+
+</div>
+
+<div
+id="currentOrders"
+class="orderContainer">
+
+<div class="noOrders">
 
 No Orders Loaded
+
+</div>
+
+</div>
+
+</div>
+
+<div class="previousOrders">
+
+<div class="orderCounter">
+
+Previous Orders
+(<span id="previousCount">0</span>)
+
+</div>
+
+<div
+id="previousOrders"
+class="orderContainer">
+
+</div>
 
 </div>
 
@@ -166,7 +531,7 @@ async function(){
 const phone =
 document.getElementById(
 "trackPhone"
-).value;
+).value.trim();
 
 if(!phone){
 
@@ -183,13 +548,21 @@ localStorage.setItem(
 phone
 );
 
-const ordersDiv =
+const currentDiv =
 document.getElementById(
-"orders"
+"currentOrders"
 );
 
-ordersDiv.innerHTML =
-"Loading Orders...";
+const previousDiv =
+document.getElementById(
+"previousOrders"
+);
+
+currentDiv.innerHTML =
+'<div class="noOrders">Loading...</div>';
+
+previousDiv.innerHTML =
+"";
 
 const snap =
 await getDocs(
@@ -199,171 +572,278 @@ db,
 )
 );
 
-const orders=[];
+const currentOrders=[];
+const previousOrders=[];
 
 snap.forEach((d)=>{
 
-const data=d.data();
+const data =
+d.data();
 
 if(
-data.phone==phone
+data.phone ==
+phone
 ){
 
-orders.push(data);
+if(
+data.status=="Delivered"
+||
+data.status=="Cancelled"
+){
+
+previousOrders.push(data);
+
+}else{
+
+currentOrders.push(data);
+
+}
 
 }
 
 });
 
-orders.sort(
+currentOrders.sort(
 (a,b)=>
-new Date(b.createdAt) -
+new Date(b.createdAt)
+-
 new Date(a.createdAt)
 );
 
-let html="";
+previousOrders.sort(
+(a,b)=>
+new Date(b.createdAt)
+-
+new Date(a.createdAt)
+);
 
-if(
-orders.length==0
-){
+document.getElementById(
+"currentCount"
+).innerText =
+currentOrders.length;
 
-ordersDiv.innerHTML =
-"No Orders Found";
+document.getElementById(
+"previousCount"
+).innerText =
+previousOrders.length;
 
-return;
+let currentHtml="";
+let previousHtml="";
 
-}
+currentOrders.forEach((data,index)=>{
 
-orders.forEach((data)=>{
+let trackerHtml="";
 
-let statusClass =
-"pending";
+if(data.status=="Pending"){
 
-let emoji =
-"🟡";
+trackerHtml=`
 
-if(
-data.status==
-"Confirmed"
-){
+<div class="tracker">
 
-statusClass=
-"confirmed";
+<div class="dot active"></div>
 
-emoji="🟢";
+<div class="line"></div>
 
-}
+<div class="truck">🚚</div>
 
-if(
-data.status==
-"Out For Delivery"
-){
+<div class="line"></div>
 
-statusClass=
-"delivery";
+<div class="dot"></div>
 
-emoji="🔵";
+</div>
 
-}
-
-if(
-status=="Delivered"
-||
-status=="Cancelled"
-){
-return;
-}{
-
-statusClass=
-"delivered";
-
-emoji="✅";
+`;
 
 }
 
-html += `
+else if(data.status=="Confirmed"){
 
-<div class="card">
+trackerHtml=`
 
-<h3>
+<div class="tracker">
 
-${emoji}
-Order ID:
+<div class="dot active"></div>
+
+<div class="line active"></div>
+
+<div class="truck active">🚚</div>
+
+<div class="line"></div>
+
+<div class="dot"></div>
+
+</div>
+
+`;
+
+}
+
+else if(data.status=="Out For Delivery"){
+
+trackerHtml=`
+
+<div class="tracker">
+
+<div class="dot active"></div>
+
+<div class="line active"></div>
+
+<div class="truck active">🚚</div>
+
+<div class="line active"></div>
+
+<div class="dot"></div>
+
+</div>
+
+`;
+
+}
+
+else{
+
+trackerHtml=`
+
+<div class="tracker">
+
+<div class="dot active"></div>
+
+<div class="line active"></div>
+
+<div class="truck active">🚚</div>
+
+<div class="line active"></div>
+
+<div class="dot active"></div>
+
+</div>
+
+`;
+
+}
+
+currentHtml += `
+
+<div class="orderCard">
+
+<div class="cardHeader">
+
+<div>
+
+<div class="customerName">
+
+${data.name}
+
+</div>
+
+<div style="margin-top:6px;">
+
+Customer ID:
 ${data.orderId}
 
-</h3>
+</div>
 
-<p>
+</div>
 
-📅
+<button
+class="expandBtn"
+onclick="toggleCard(${index})">
+
++
+
+</button>
+
+</div>
+
+<div
+class="cardDetails"
+id="card${index}">
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Customer ID:
+
+</span>
+
+${data.orderId}
+
+</div>
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Mobile:
+
+</span>
+
+${data.phone}
+
+</div>
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Address:
+
+</span>
+
+${data.address}
+
+</div>
+
+<div class="dateTimeRow">
+
+<div>
+
+Date:
 ${new Date(
 data.createdAt
 ).toLocaleDateString()}
 
-<br>
+</div>
 
-⏰
+<div>
+
+Time:
 ${new Date(
 data.createdAt
 ).toLocaleTimeString()}
 
-</p>
-
-<div
-style="
-background:#fafafa;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
-">
-
-<b>
-Products:
-</b>
-
-<ul>
-
-${(data.items || []).map(item => `
-
-<li>
-
-${item.product}
--
-${item.qty} KG
-
-</li>
-
-`).join("")}
-
-</ul>
+</div>
 
 </div>
 
-<p>
+${trackerHtml}
 
-⚖ Total KG:
-${data.totalKg || 0}
+<div class="trackerLabels">
 
-</p>
+<span>
 
-<p>
+Confirm
 
-💰 Total:
-₹${data.totalAmount || 0}
+</span>
 
-</p>
+<span>
 
-<div
-class="
-status
-${statusClass}
-">
+Out For Delivery
 
-${emoji}
-${data.status}
+</span>
+
+<span>
+
+Delivered
+
+</span>
 
 </div>
-${
+
+`;
+
+if(
 data.status=="Pending"
 &&
 (
@@ -378,38 +858,181 @@ new Date(data.createdAt)
 60
 <5
 )
-?
+){
 
-`
+currentHtml += `
 
 <button
+class="cancelBtn"
 onclick="
 cancelOrder(
 '${data.orderId}'
 )
 ">
 
-❌ Cancel Order
+Cancel Order
 
 </button>
 
-`
-
-:
-
-""
+`;
 
 }
+
+currentHtml += `
+
+</div>
+
 </div>
 
 `;
 
 });
 
-ordersDiv.innerHTML =
-html;
+previousOrders.forEach((data)=>{
+
+previousHtml += `
+
+<div class="orderCard">
+
+<div class="customerName">
+
+${data.name}
+
+</div>
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Customer ID:
+
+</span>
+
+${data.orderId}
+
+</div>
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Mobile:
+
+</span>
+
+${data.phone}
+
+</div>
+
+<div class="infoRow">
+
+<span class="infoLabel">
+
+Address:
+
+</span>
+
+${data.address}
+
+</div>
+
+<div class="dateTimeRow">
+
+<div>
+
+Date:
+${new Date(
+data.createdAt
+).toLocaleDateString()}
+
+</div>
+
+<div>
+
+Time:
+${new Date(
+data.createdAt
+).toLocaleTimeString()}
+
+</div>
+
+</div>
+
+<div
+style="
+margin-top:20px;
+font-size:18px;
+font-weight:700;
+color:#27c93f;
+">
+
+${data.status}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(
+currentOrders.length==0
+){
+
+currentDiv.innerHTML =
+
+'<div class="noOrders">No Current Orders</div>';
+
+}else{
+
+currentDiv.innerHTML =
+currentHtml;
+
+}
+
+if(
+previousOrders.length==0
+){
+
+previousDiv.innerHTML =
+
+'<div class="noOrders">No Previous Orders</div>';
+
+}else{
+
+previousDiv.innerHTML =
+previousHtml;
+
+}
 
 };
+
+window.toggleCard =
+function(index){
+
+const card =
+document.getElementById(
+"card"+index
+);
+
+if(
+card.style.display==
+"block"
+){
+
+card.style.display=
+"none";
+
+}else{
+
+card.style.display=
+"block";
+
+}
+
+};
+
 window.cancelOrder =
 async function(orderId){
 
@@ -465,6 +1088,7 @@ break;
 }
 
 };
+
 window.onload =
 function(){
 
@@ -518,4 +1142,5 @@ loadOrders();
 </script>
 
 </body>
+
 </html>
