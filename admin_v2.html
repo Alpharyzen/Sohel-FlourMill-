@@ -78,8 +78,8 @@ margin-top:4px;
 
 .menuBtn{
 
-width:50px;
-height:50px;
+width:52px;
+height:52px;
 
 border:none;
 
@@ -109,9 +109,9 @@ height:100vh;
 
 background:#111;
 
-z-index:9999;
-
 padding:25px;
+
+z-index:9999;
 
 transition:.35s;
 
@@ -173,8 +173,15 @@ font-weight:600;
 
 cursor:pointer;
 
+transition:.25s;
+
 }
 
+.menuItem:hover{
+
+background:#252525;
+
+}
 /* DASHBOARD */
 
 .dashboard{
@@ -243,6 +250,8 @@ font-size:22px;
 margin-bottom:15px;
 
 }
+
+/* ORDERS */
 
 .ordersContainer{
 
@@ -332,9 +341,11 @@ word-break:break-word;
 
 white-space:normal;
 
+min-height:70px;
+
 }
 
-/* STATUS */
+/* STATUS BADGES */
 
 .statusBadge{
 
@@ -422,6 +433,14 @@ color:white;
 font-size:18px;
 
 cursor:pointer;
+
+transition:.25s;
+
+}
+
+.actionBtn:hover{
+
+opacity:.9;
 
 }
 
@@ -516,6 +535,14 @@ background:#ff7043;
 
 }
 
+/* HIDDEN PLAYER */
+
+#orderPlayer{
+
+display:none;
+
+}
+
 /* NEW ORDER POPUP */
 
 .alarmModal{
@@ -528,7 +555,7 @@ left:0;
 width:100%;
 height:100%;
 
-background:rgba(0,0,0,.8);
+background:rgba(0,0,0,.85);
 
 display:none;
 
@@ -549,27 +576,28 @@ display:flex;
 .alarmBox{
 
 width:90%;
-max-width:350px;
+
+max-width:380px;
 
 background:white;
 
 color:black;
 
-border-radius:25px;
+border-radius:28px;
 
 padding:25px;
 
 text-align:center;
 
-animation:pop .25s ease;
+animation:popupAnim .25s ease;
 
 }
 
-@keyframes pop{
+@keyframes popupAnim{
 
 from{
 
-transform:scale(.8);
+transform:scale(.85);
 
 opacity:0;
 
@@ -587,19 +615,21 @@ opacity:1;
 
 .alarmTitle{
 
-font-size:24px;
+font-size:28px;
 
 font-weight:800;
 
-margin-bottom:15px;
-
 color:#f44336;
+
+margin-bottom:15px;
 
 }
 
 .alarmText{
 
 font-size:16px;
+
+line-height:1.6;
 
 margin-bottom:20px;
 
@@ -609,7 +639,7 @@ margin-bottom:20px;
 
 width:100%;
 
-height:50px;
+height:52px;
 
 border:none;
 
@@ -627,7 +657,7 @@ cursor:pointer;
 
 }
 
-/* EMPTY */
+/* EMPTY TEXT */
 
 .emptyText{
 
@@ -676,11 +706,11 @@ height:58px;
 </head>
 <body>
 
-<!-- NEW ORDER ALARM -->
+<!-- HIDDEN ORDER PLAYER -->
 
 <audio
-id="newOrderAlarm"
-preload="auto">
+id="orderPlayer"
+loop>
 
 <source
 src="alarm.mp4"
@@ -688,7 +718,7 @@ type="audio/mp4">
 
 </audio>
 
-<!-- ALARM POPUP -->
+<!-- NEW ORDER POPUP -->
 
 <div
 id="alarmModal"
@@ -704,7 +734,11 @@ class="alarmModal">
 
 <div class="alarmText">
 
-A new customer order has arrived.
+A new order has arrived.
+
+<br><br>
+
+Press OK to stop alarm.
 
 </div>
 
@@ -720,7 +754,7 @@ OK
 
 </div>
 
-<!-- SIDEBAR -->
+<!-- OVERLAY -->
 
 <div
 id="overlay"
@@ -728,6 +762,8 @@ class="overlay"
 onclick="closeMenu()">
 
 </div>
+
+<!-- SIDEBAR -->
 
 <div
 id="sidebar"
@@ -752,7 +788,9 @@ location.href=
 
 <div
 class="menuItem"
-onclick="loadOrders()">
+onclick="
+loadOrders()
+">
 
 🔄 Refresh Orders
 
@@ -760,7 +798,9 @@ onclick="loadOrders()">
 
 <div
 class="menuItem"
-onclick="logout()">
+onclick="
+logout()
+">
 
 🚪 Logout
 
@@ -790,7 +830,9 @@ Delivery Boy Panel
 
 <button
 class="menuBtn"
-onclick="openMenu()">
+onclick="
+openMenu()
+">
 
 ☰
 
@@ -858,7 +900,7 @@ Out For Delivery
 
 </div>
 
-<!-- ORDERS -->
+<!-- CURRENT ORDERS -->
 
 <div class="sectionTitle">
 
@@ -920,7 +962,7 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
-let lastPendingCount = 1;
+let lastPendingCount = -1;
 
 /* MENU */
 
@@ -928,12 +970,20 @@ window.openMenu=
 function(){
 
 document
-.getElementById("sidebar")
-.classList.add("open");
+.getElementById(
+"sidebar"
+)
+.classList.add(
+"open"
+);
 
 document
-.getElementById("overlay")
-.classList.add("show");
+.getElementById(
+"overlay"
+)
+.classList.add(
+"show"
+);
 
 };
 
@@ -941,12 +991,20 @@ window.closeMenu=
 function(){
 
 document
-.getElementById("sidebar")
-.classList.remove("open");
+.getElementById(
+"sidebar"
+)
+.classList.remove(
+"open"
+);
 
 document
-.getElementById("overlay")
-.classList.remove("show");
+.getElementById(
+"overlay"
+)
+.classList.remove(
+"show"
+);
 
 };
 
@@ -959,19 +1017,19 @@ location.reload();
 
 };
 
-/* ALARM */
+/* ALARM STOP */
 
 window.stopAlarm=
 function(){
 
-const alarm=
+const player=
 document.getElementById(
-"newOrderAlarm"
+"orderPlayer"
 );
 
-alarm.pause();
+player.pause();
 
-alarm.currentTime=0;
+player.currentTime=0;
 
 document
 .getElementById(
@@ -983,18 +1041,18 @@ document
 
 };
 
+/* ALARM START */
+
 function triggerNewOrderAlarm(){
 
-const alarm=
+const player=
 document.getElementById(
-"newOrderAlarm"
+"orderPlayer"
 );
 
-alarm.currentTime=0;
+player.currentTime=0;
 
-alarm.loop=true;
-
-alarm.play().catch(()=>{});
+player.play().catch(()=>{});
 
 document
 .getElementById(
@@ -1016,17 +1074,53 @@ navigator.vibrate(
 
 }
 
+/* AUTOPLAY UNLOCK */
+
+window.addEventListener(
+"load",
+()=>{
+
+document.body.addEventListener(
+
+"click",
+
+()=>{
+
+const player=
+document.getElementById(
+"orderPlayer"
+);
+
+player.play()
+.then(()=>{
+
+player.pause();
+
+player.currentTime=0;
+
+})
+.catch(()=>{});
+
+},
+
+{once:true}
+
+);
+
+}
+);
+
 /* LOAD ORDERS */
 
 window.loadOrders =
 async function(){
 
-const currentDiv =
+const currentDiv=
 document.getElementById(
 "currentOrders"
 );
 
-const snap =
+const snap=
 await getDocs(
 collection(
 db,
@@ -1040,7 +1134,8 @@ let currentPendingCount=0;
 
 snap.forEach((d)=>{
 
-const data=d.data();
+const data=
+d.data();
 
 orders.push({
 
@@ -1063,8 +1158,10 @@ currentPendingCount++;
 /* NEW ORDER DETECTION */
 
 if(
-lastPendingCount >= 0 &&
-currentPendingCount > lastPendingCount
+lastPendingCount >= 0
+&&
+currentPendingCount >
+lastPendingCount
 ){
 
 triggerNewOrderAlarm();
@@ -1094,7 +1191,7 @@ let confirmedCount=0;
 let deliveryCount=0;
 orders.forEach((data)=>{
 
-/* HIDE OLD DELIVERED */
+/* HIDE DELIVERED AFTER 5 MIN */
 
 if(
 data.status=="Delivered"
@@ -1102,26 +1199,6 @@ data.status=="Delivered"
 data.deliveredAt
 ){
 
-else if(
-data.status=="Cancelled"
-&&
-data.cancelledAt
-){
-
-const date=
-new Date(
-data.cancelledAt
-).toLocaleDateString();
-
-if(
-weekData[date]
-){
-
-weekData[date].push(data);
-
-}
-
-}
 const mins=
 
 (
@@ -1144,7 +1221,7 @@ return;
 
 }
 
-/* HIDE OLD CANCELLED */
+/* HIDE CANCELLED AFTER 5 MIN */
 
 if(
 data.status=="Cancelled"
@@ -1167,8 +1244,6 @@ data.cancelledAt
 60;
 
 if(mins>5){
-
-data.hidden=true;
 
 return;
 
@@ -1208,6 +1283,8 @@ data
 
 });
 
+/* UPDATE DASHBOARD */
+
 document
 .getElementById(
 "pendingCount"
@@ -1228,6 +1305,8 @@ document
 )
 .innerText=
 deliveryCount;
+
+/* RENDER ORDERS */
 
 currentDiv.innerHTML =
 
@@ -1269,7 +1348,7 @@ loadOrders();
 
 };
 
-/* REAL SWIPE ENGINE */
+/* SWIPE ENGINE */
 
 let activeThumb=null;
 let activeDocId=null;
@@ -1336,7 +1415,9 @@ let diff=
 currentX-startX;
 
 if(diff<0){
+
 diff=0;
+
 }
 
 const track=
@@ -1392,7 +1473,8 @@ activeStatus=="Pending"
 
 updateData={
 
-status:"Confirmed",
+status:
+"Confirmed",
 
 confirmedAt:
 new Date()
@@ -1426,7 +1508,8 @@ activeStatus==
 
 updateData={
 
-status:"Delivered",
+status:
+"Delivered",
 
 deliveredAt:
 new Date()
@@ -1462,7 +1545,9 @@ activeThumb.style.left=
 "0px";
 
 activeThumb=null;
+
 activeDocId=null;
+
 activeStatus=null;
 
 document.removeEventListener(
@@ -1486,7 +1571,6 @@ endSwipe
 );
 
 }
-
 window.createOrderCard =
 function(data){
 
@@ -1735,14 +1819,16 @@ event,
 <div
 class="
 statusBadge
-deliveredBadge
+${badgeClass}
 "
 style="
 margin-top:15px;
 font-size:15px;
 ">
 
-✓ COMPLETED
+${data.status=="Cancelled"
+? "✕ CANCELLED"
+: "✓ COMPLETED"}
 
 </div>
 
@@ -1755,6 +1841,8 @@ font-size:15px;
 `;
 
 };
+
+/* AUTO REFRESH */
 
 setInterval(
 ()=>{
